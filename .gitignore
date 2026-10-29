@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.asv
+.DS_Store
+.directory
+*~
+Ref/Lecture*.pdf
