@@ -442,7 +442,7 @@ Báo cáo này trình bày nghiên cứu chuyên sâu về thiết kế, phân t
 Ở khối STBC $2 	imes 2$, báo cáo phân tích tường minh đại số ma trận, tính toán chính xác 4 giá trị tín hiệu nhận $r_0, r_1, r_2, r_3$ qua hai khe thời gian và chứng minh toán học sự trực giao tuyệt đối của ma trận kênh tương đương $\mathbf{H}_{eff}$, qua đó khôi phục hoàn hảo hai ký hiệu gốc với sai số máy tính đạt mức $1.11 	imes 10^{-16}$. Ở khối SDM $2 	imes 2$, báo cáo phân tích đối chiếu ba kỹ thuật tách sóng: Zero-Forcing (ZF), Minimum Mean Square Error (MMSE) và tiền mã hóa SVD (Singular Value Decomposition). Báo cáo làm rõ bản chất khuếch đại nhiễu của ZF thông qua nghịch đảo ma trận Gram $(H^H H)^{-1}$ và cơ chế phân tách thành hai kênh con trực giao song song của SVD.
 </p>
 <p>
-Trên kênh fading phẳng Rayleigh biến đổi chậm, đồ án khảo sát toàn diện hiệu năng tỷ lệ lỗi bit (BER) qua $2 	imes 10^5$ bit mô phỏng Monte Carlo, đối chiếu chặt chẽ với công thức giải tích giải tích khép kín cho các cấu hình SISO, SIMO (SC, MRC), MISO $2 	imes 1$ Alamouti và MIMO $2 	imes 2$ Alamouti. Kết quả chứng minh hệ thống MIMO $2 	imes 2$ STBC đạt bậc phân tập tối đa $d = N_t N_r = 4$, độ dốc đường cong BER gấp 4 lần SISO và tiết kiệm tới $16.5	ext{ dB}$ công suất phát tại $	ext{BER} = 10^{-3}$. Khảo sát dung lượng kênh truyền theo công thức Shannon-Telatar khẳng định ưu thế vượt trội của SDM trong việc nhân đôi tốc độ truyền dữ liệu, đồng thời phân tích chi tiết thuật toán Water-filling với ngưỡng chuyển dịch chế độ $10.15	ext{ dB}$ từ Beamforming sang ghép kênh đa luồng, làm rõ sự đánh đổi kinh điển giữa độ lợi phân tập và tốc độ ghép kênh (Diversity-Multiplexing Trade-off).
+Trên kênh fading phẳng Rayleigh biến đổi chậm, đồ án khảo sát toàn diện hiệu năng tỷ lệ lỗi bit (BER) qua $2 	imes 10^5$ bit mô phỏng Monte Carlo, đối chiếu chặt chẽ với công thức giải tích khép kín cho các cấu hình SISO, SIMO (SC, MRC), MISO $2 	imes 1$ Alamouti và MIMO $2 	imes 2$ Alamouti. Kết quả chứng minh hệ thống MIMO $2 	imes 2$ STBC đạt bậc phân tập tối đa $d = N_t N_r = 4$, độ dốc đường cong BER gấp 4 lần SISO và tiết kiệm tới $16.9	ext{ dB}$ công suất phát tại $	ext{BER} = 10^{-3}$. Khảo sát dung lượng kênh truyền theo công thức Shannon-Telatar khẳng định ưu thế vượt trội của SDM trong việc nhân đôi tốc độ truyền dữ liệu, đồng thời phân tích chi tiết thuật toán Water-filling với ngưỡng chuyển dịch chế độ $10.10	ext{ dB}$ từ Beamforming sang ghép kênh đa luồng, làm rõ sự đánh đổi kinh điển giữa độ lợi phân tập và tốc độ ghép kênh (Diversity-Multiplexing Trade-off).
 </p>
 
 <div style="margin-top: 30px;"></div>
@@ -454,7 +454,7 @@ This project presents an in-depth analytical investigation, mathematical derivat
 For $2 	imes 2$ STBC, the exact algebra of received signals across two successive time slots ($r_0, r_1, r_2, r_3$) is computed, and the column orthogonality of the virtual effective channel matrix $\mathbf{H}_{eff}$ is mathematically proven, achieving perfect signal recovery with machine precision error of $1.11 	imes 10^{-16}$. For $2 	imes 2$ SDM, three detection techniques are analyzed: Zero-Forcing (ZF), Minimum Mean Square Error (MMSE), and Singular Value Decomposition (SVD) precoding. The noise enhancement phenomenon in ZF is rigorously characterized via the diagonal entries of $(H^H H)^{-1}$, while SVD establishes parallel, non-interfering spatial subchannels.
 </p>
 <p style="font-style: italic;">
-Under quasi-static Rayleigh flat fading channels, extensive Monte Carlo simulations ($2 	imes 10^5$ bits) are conducted to evaluate Bit Error Rate (BER) across SNR values from $0	ext{ dB}$ to $25	ext{ dB}$, showing exact concordance with closed-form theoretical models across SISO, SIMO (SC, MRC), MISO $2 	imes 1$, and MIMO $2 	imes 2$ schemes. The Alamouti $2 	imes 2$ system achieves maximum diversity order $d = N_t N_r = 4$, yielding a $16.5	ext{ dB}$ SNR gain over SISO at $	ext{BER} = 10^{-3}$. Furthermore, Shannon-Telatar ergodic and instantaneous capacities demonstrate that SDM doubles the spectral efficiency at high SNRs, while Water-filling power allocation provides substantial capacity gains at low SNRs below the critical threshold of $10.15	ext{ dB}$, embodying the fundamental Diversity-versus-Multiplexing Trade-off (DMT).
+Under quasi-static Rayleigh flat fading channels, extensive Monte Carlo simulations ($2 	imes 10^5$ bits) are conducted to evaluate Bit Error Rate (BER) across SNR values from $0	ext{ dB}$ to $25	ext{ dB}$, showing exact concordance with closed-form theoretical models across SISO, SIMO (SC, MRC), MISO $2 	imes 1$, and MIMO $2 	imes 2$ schemes. The Alamouti $2 	imes 2$ system achieves maximum diversity order $d = N_t N_r = 4$, yielding a $16.9	ext{ dB}$ SNR gain over SISO at $	ext{BER} = 10^{-3}$. Furthermore, Shannon-Telatar ergodic and instantaneous capacities demonstrate that SDM doubles the spectral efficiency at high SNRs, while Water-filling power allocation provides substantial capacity gains at low SNRs below the critical threshold of $10.10	ext{ dB}$, embodying the fundamental Diversity-versus-Multiplexing Trade-off (DMT).
 </p>
 
 <div class="page-break"></div>
@@ -905,10 +905,10 @@ Trong đó:
 $$\mathbf{H}\mathbf{H}^H = \begin{bmatrix} 0.58 & 0.46 \\ 0.46 & 0.52 \end{bmatrix}$$
 $$\det(\mathbf{H}\mathbf{H}^H - \lambda \mathbf{I}) = \lambda^2 - \text{tr}(\mathbf{H}\mathbf{H}^H)\lambda + \det(\mathbf{H}\mathbf{H}^H) = \lambda^2 - 1.10\lambda + 0.09 = 0$$
 Giải phương trình bậc hai thu được hai giá trị riêng:
-$$\lambda_1 = \frac{1.10 + \sqrt{1.10^2 - 4(0.09)}}{2} = \frac{1.10 + \sqrt{1.21 - 0.36}}{2} = \frac{1.10 + \sqrt{0.85}}{2} \approx \mathbf{1.01196}$$
-$$\lambda_2 = \frac{1.10 - \sqrt{0.85}}{2} \approx \mathbf{0.08804}$$
+$$\lambda_1 = \frac{1.10 + \sqrt{1.10^2 - 4(0.09)}}{2} = \frac{1.10 + \sqrt{1.21 - 0.36}}{2} = \frac{1.10 + \sqrt{0.85}}{2} \approx \mathbf{1.01098}$$
+$$\lambda_2 = \frac{1.10 - \sqrt{0.85}}{2} \approx \mathbf{0.08902}$$
 Các giá trị kỳ dị tương ứng là căn bậc hai của các giá trị riêng:
-$$\sigma_1 = \sqrt{\lambda_1} \approx \mathbf{1.00596}, \quad \sigma_2 = \sqrt{\lambda_2} \approx \mathbf{0.29671}$$
+$$\sigma_1 = \sqrt{\lambda_1} \approx \mathbf{1.00547}, \quad \sigma_2 = \sqrt{\lambda_2} \approx \mathbf{0.29837}$$
 Ma trận Unitary $\mathbf{U}$ và $\mathbf{V}$ tìm được xấp xỉ:
 $$\mathbf{U} = \begin{bmatrix} -0.7290 & -0.6845 \\ -0.6845 & 0.7290 \end{bmatrix}, \quad \mathbf{V} = \begin{bmatrix} -0.7797 & 0.6261 \\ -0.6261 & -0.7797 \end{bmatrix}$$
 
@@ -931,9 +931,9 @@ $$\mathbf{U} = \begin{bmatrix} -0.7290 & -0.6845 \\ -0.6845 & 0.7290 \end{bmatri
 
 <p>
 Phương trình hệ thống được tách rời hoàn toàn thành hai kênh con SISO song song độc lập:
-$$\tilde{y}_1 = \sigma_1 x_1 + \tilde{n}_1 = 1.00596 x_1 + \tilde{n}_1$$
-$$\tilde{y}_2 = \sigma_2 x_2 + \tilde{n}_2 = 0.29671 x_2 + \tilde{n}_2$$
-Việc khôi phục ký hiệu chỉ đơn giản là chia cho giá trị kỳ dị: $\hat{x}_i = \tilde{y}_i / \sigma_i$. Sai số khôi phục SVD đo được trong mô phỏng là $\|\hat{\mathbf{x}}_{SVD} - \mathbf{x}\|_2 = 9.42 \times 10^{-16}$. SVD hoàn toàn không gây hiện tượng khuếch đại tạp âm và triệt tiêu $100\%$ can nhiễu giữa các luồng.
+$$\tilde{y}_1 = \sigma_1 x_1 + \tilde{n}_1 = 1.00547 x_1 + \tilde{n}_1$$
+$$\tilde{y}_2 = \sigma_2 x_2 + \tilde{n}_2 = 0.29837 x_2 + \tilde{n}_2$$
+Việc khôi phục ký hiệu: $\hat{x}_i = 	ilde{y}_i / \sigma_i = x_i + 	ilde{n}_i / \sigma_i$. Do $\mathbf{U}$ là ma trận unita, vector tạp âm sau lọc không gian $	ilde{\mathbf{n}} = \mathbf{U}^H \mathbf{n}$ bảo toàn tính chất phân phối Gauss trắng ($\mathbb{E}[	ilde{\mathbf{n}} 	ilde{\mathbf{n}}^H] = \sigma_n^2 \mathbf{I}$), không gây tương quan tạp âm giữa hai luồng. Tuy nhiên, khi chia cho giá trị kỳ dị $\sigma_i$, phương sai tạp âm tương đương trên luồng $ là $\sigma_n^2 / \sigma_i^2$. Kênh con yếu ($\sigma_2 pprox 0.29837$) làm công suất tạp âm bị khuếch đại lên /\sigma_2^2 pprox 11.233$ lần (0.50	ext{ dB}$, thậm chí cao hơn mức .22$ lần của bộ cân bằng ZF). Ưu thế thực sự của SVD là triệt tiêu hoàn toàn can nhiễu giữa các luồng dữ liệu (Inter-Stream Interference), tạo tiền đề cho thuật toán Water-filling tối ưu hóa công suất, tắt kênh con yếu ở dải SNR thấp để tránh bùng nổ tạp âm. Sai số khôi phục mô phỏng: .42 	imes 10^{-16}$ (Python) và .02 	imes 10^{-15}$ (MATLAB).
 </p>
 
 <h3 class="subsection-title">2.2.5. So sánh đối chiếu toàn diện 3 phương pháp tách sóng SDM</h3>
@@ -1152,7 +1152,7 @@ Hình 3.1 biểu diễn đồ thị so sánh hiệu năng BER của 5 cấu hìn
       <li>Hệ thống SIMO $1 \times 2$ SC đòi hỏi $\text{SNR} \approx 13.0\text{ dB}$ (tiết kiệm $10.9\text{ dB}$ so với SISO).</li>
       <li>Hệ thống SIMO $1 \times 2$ MRC đòi hỏi $\text{SNR} \approx 11.0\text{ dB}$ (tiết kiệm $12.9\text{ dB}$ so với SISO, tốt hơn SC $2.0\text{ dB}$).</li>
       <li>Hệ thống MISO $2 \times 1$ Alamouti đòi hỏi $\text{SNR} \approx 14.0\text{ dB}$ (đúng bằng SIMO MRC $+ 3\text{ dB}$ penalty do chia công suất).</li>
-      <li>Hệ thống MIMO $2 \times 2$ Alamouti chỉ đòi hỏi mức $\text{SNR} \approx \mathbf{7.4\text{ dB}}$! Như vậy, so với SISO truyền thống, MIMO $2 \times 2$ STBC mang lại <strong>độ lợi công suất vượt trội lên tới $16.5\text{ dB}$</strong> (tương đương với việc giảm công suất máy phát hơn $44$ lần mà vẫn đạt cùng một độ tin cậy dịch vụ).</li>
+      <li>Hệ thống MIMO $2 \times 2$ Alamouti chỉ đòi hỏi mức $\text{SNR} \approx \mathbf{7.05\text{ dB}}$! Như vậy, so với SISO truyền thống, MIMO $2 \times 2$ STBC mang lại <strong>độ lợi công suất vượt trội lên tới $16.9\text{ dB}$</strong> (tương đương với việc giảm công suất máy phát hơn $44$ lần mà vẫn đạt cùng một độ tin cậy dịch vụ).</li>
     </ul>
   </li>
 </ol>
@@ -1168,11 +1168,11 @@ Hình 3.1 biểu diễn đồ thị so sánh hiệu năng BER của 5 cấu hìn
     </tr>
   </thead>
   <tbody>
-    <tr><td><strong>SISO ($1 \times 1$)</strong></td><td class="text-center font-mono">1</td><td class="text-center font-mono">23.9 dB</td><td class="text-center font-mono">0.0 dB (Gốc)</td></tr>
-    <tr><td><strong>MISO ($2 \times 1$) Alamouti</strong></td><td class="text-center font-mono">2</td><td class="text-center font-mono">14.0 dB</td><td class="text-center font-mono">+9.9 dB</td></tr>
-    <tr><td><strong>SIMO ($1 \times 2$) SC</strong></td><td class="text-center font-mono">2</td><td class="text-center font-mono">13.0 dB</td><td class="text-center font-mono">+10.9 dB</td></tr>
-    <tr><td><strong>SIMO ($1 \times 2$) MRC</strong></td><td class="text-center font-mono">2</td><td class="text-center font-mono">11.0 dB</td><td class="text-center font-mono">+12.9 dB</td></tr>
-    <tr><td><strong>MIMO ($2 \times 2$) Alamouti STBC</strong></td><td class="text-center font-mono"><strong>4</strong></td><td class="text-center font-mono"><strong>7.4 dB</strong></td><td class="text-center font-mono"><strong>+16.5 dB</strong></td></tr>
+    <tr><td><strong>SISO ( 	imes 1$)</strong></td><td class="text-center font-mono">1</td><td class="text-center font-mono">24.0 dB</td><td class="text-center font-mono">0.0 dB (Chuẩn)</td></tr>
+    <tr><td><strong>MISO ( 	imes 1$) Alamouti</strong></td><td class="text-center font-mono">2</td><td class="text-center font-mono">14.1 dB</td><td class="text-center font-mono">+9.9 dB</td></tr>
+    <tr><td><strong>SIMO ( 	imes 2$) SC</strong></td><td class="text-center font-mono">2</td><td class="text-center font-mono">12.6 dB</td><td class="text-center font-mono">+11.4 dB</td></tr>
+    <tr><td><strong>SIMO ( 	imes 2$) MRC</strong></td><td class="text-center font-mono">2</td><td class="text-center font-mono">11.1 dB</td><td class="text-center font-mono">+12.9 dB</td></tr>
+    <tr><td><strong>MIMO ( 	imes 2$) Alamouti STBC</strong></td><td class="text-center font-mono"><strong>4</strong></td><td class="text-center font-mono"><strong>7.05 dB</strong></td><td class="text-center font-mono"><strong>+16.9 dB (Tiết kiệm ~49x)</strong></td></tr>
   </tbody>
 </table>
 
@@ -1246,21 +1246,21 @@ Trong đó $\mu$ là "mực nước" (water level) chung được tính toán đ
 <h2 class="section-title">4.5. Phân tích phân bổ công suất Water-filling trên kênh cố định H</h2>
 <p>
 Xét ma trận kênh thực nghiệm cố định của đồ án $\mathbf{H} = \begin{bmatrix} 0.7 & 0.3 \\ 0.4 & 0.6 \end{bmatrix}$. Ta đã xác định các giá trị riêng của ma trận $\mathbf{H}\mathbf{H}^H$:
-$$\lambda_1 = \sigma_1^2 \approx 1.01196, \quad \lambda_2 = \sigma_2^2 \approx 0.08804$$
+$$\lambda_1 = \sigma_1^2 \approx 1.01098, \quad \lambda_2 = \sigma_2^2 \approx 0.08902$$
 Giả sử chuẩn hóa $N_0 = 1$, các mức đáy nghịch đảo của hai kênh con là:
-$$\frac{1}{\sigma_1^2} \approx \frac{1}{1.01196} \approx \mathbf{0.9882}, \quad \frac{1}{\sigma_2^2} \approx \frac{1}{0.08804} \approx \mathbf{11.3585}$$
+$$\frac{1}{\sigma_1^2} \approx \frac{1}{1.01098} \approx \mathbf{0.9882}, \quad \frac{1}{\sigma_2^2} \approx \frac{1}{0.08902} \approx \mathbf{11.3585}$$
 Độ chênh lệch giữa hai mức đáy là:
-$$\Delta = \frac{1}{\sigma_2^2} - \frac{1}{\sigma_1^2} \approx 11.3585 - 0.9882 = 10.3703 \quad (\approx \mathbf{10.15\text{ dB}})$$
+$$\Delta = \frac{1}{\sigma_2^2} - \frac{1}{\sigma_1^2} \approx 11.3585 - 0.9882 = 10.3703 \quad (\approx \mathbf{10.10\text{ dB}})$$
 
 <p>
 Dựa trên giá trị ngưỡng $\Delta$, thuật toán Water-filling phân tách rõ ràng thành hai miền chế độ hoạt động:
 </p>
 <ol>
-  <li><strong>Vùng SNR thấp ($\text{SNR} \le 10.15\text{ dB}$, tức $P \le 10.37$):</strong> Mực nước $\mu = P + \frac{1}{\sigma_1^2}$ thấp hơn hoặc bằng mức đáy của kênh con thứ 2 ($\mu \le \frac{1}{\sigma_2^2}$). Toàn bộ công suất phát được dồn $100\%$ cho kênh con mạnh nhất:
+  <li><strong>Vùng SNR thấp ($\text{SNR} \le 10.10\text{ dB}$, tức $P \le 10.24$):</strong> Mực nước $\mu = P + \frac{1}{\sigma_1^2}$ thấp hơn hoặc bằng mức đáy của kênh con thứ 2 ($\mu \le \frac{1}{\sigma_2^2}$). Toàn bộ công suất phát được dồn $100\%$ cho kênh con mạnh nhất:
     $$p_1 = P = \text{SNR}, \quad p_2 = 0$$
     Lúc này hệ thống tự động chuyển hóa thành kỹ thuật <strong>Eigen-beamforming</strong>, tập trung truyền đơn luồng trên hướng vector riêng trội để tối đa hóa SNR thu nhận. Tại $\text{SNR} = -10\text{ dB}$, phương pháp Water-filling đạt dung lượng $0.1389\text{ bps/Hz}$, tăng gần gấp đôi so với phân bổ đều EPA ($0.0776\text{ bps/Hz}$).
   </li>
-  <li><strong>Vùng SNR cao ($\text{SNR} > 10.15\text{ dB}$):</strong> Mực nước dâng cao hơn đáy của kênh thứ hai. Cả hai kênh con đều được cấp phát công suất:
+  <li><strong>Vùng SNR cao ($\text{SNR} > 10.10\text{ dB}$):</strong> Mực nước dâng cao hơn đáy của kênh thứ hai. Cả hai kênh con đều được cấp phát công suất:
     $$\mu = \frac{P + 1/\sigma_1^2 + 1/\sigma_2^2}{2} \implies p_1 = \mu - \frac{1}{\sigma_1^2}, \quad p_2 = \mu - \frac{1}{\sigma_2^2}$$
     Khi $\text{SNR} \to \infty$, $P \gg \Delta$, tỷ lệ $p_1 / p_2 \to 1$, phân bổ công suất Water-filling tiệm cận hoàn toàn về phân bổ đều EPA (độ lệch dung lượng giữa WF và EPA tiến dần về 0).
   </li>
@@ -1281,7 +1281,7 @@ Dựa trên giá trị ngưỡng $\Delta$, thuật toán Water-filling phân tá
     <tr><td class="text-center font-mono">-10 dB</td><td class="text-center font-mono">0.100</td><td class="text-center font-mono">0.100 (100%)</td><td class="text-center font-mono">0.000 (0%)</td><td>Eigen-Beamforming (Đơn luồng)</td></tr>
     <tr><td class="text-center font-mono">0 dB</td><td class="text-center font-mono">1.000</td><td class="text-center font-mono">1.000 (100%)</td><td class="text-center font-mono">0.000 (0%)</td><td>Eigen-Beamforming (Đơn luồng)</td></tr>
     <tr><td class="text-center font-mono">5 dB</td><td class="text-center font-mono">3.162</td><td class="text-center font-mono">3.162 (100%)</td><td class="text-center font-mono">0.000 (0%)</td><td>Eigen-Beamforming (Đơn luồng)</td></tr>
-    <tr><td class="text-center font-mono">10.15 dB</td><td class="text-center font-mono">10.37</td><td class="text-center font-mono">10.37 (100%)</td><td class="text-center font-mono">0.000 (0%)</td><td><strong>Ngưỡng chuyển đổi chế độ</strong></td></tr>
+    <tr><td class="text-center font-mono">10.10 dB</td><td class="text-center font-mono">10.24</td><td class="text-center font-mono">10.24 (100%)</td><td class="text-center font-mono">0.000 (0%)</td><td><strong>Ngưỡng chuyển đổi chế độ</strong></td></tr>
     <tr><td class="text-center font-mono">15 dB</td><td class="text-center font-mono">31.62</td><td class="text-center font-mono">20.99 (66.4%)</td><td class="text-center font-mono">10.63 (33.6%)</td><td>Ghép kênh đa luồng (SDM)</td></tr>
     <tr><td class="text-center font-mono">20 dB</td><td class="text-center font-mono">100.0</td><td class="text-center font-mono">55.18 (55.2%)</td><td class="text-center font-mono">44.82 (44.8%)</td><td>Ghép kênh đa luồng (SDM)</td></tr>
     <tr><td class="text-center font-mono">30 dB</td><td class="text-center font-mono">1000.0</td><td class="text-center font-mono">505.18 (50.5%)</td><td class="text-center font-mono">494.82 (49.5%)</td><td>Tiệm cận phân bổ đồng đều (EPA)</td></tr>
@@ -1383,7 +1383,7 @@ $$d(r) = (2 - r)(2 - r) = (2 - r)^2$$
 
 <figure class="academic-figure">
   <img src="../figures/fig5_waterfilling_allocation.png" alt="Waterfilling Power Allocation">
-  <figcaption class="figure-caption"><strong>Hình 4.2:</strong> Minh họa phân bổ công suất tối ưu Water-filling trên kênh MIMO 2x2 (Ngưỡng chuyển tiếp chế độ $10.15\text{ dB}$).</figcaption>
+  <figcaption class="figure-caption"><strong>Hình 4.2:</strong> Minh họa phân bổ công suất tối ưu Water-filling trên kênh MIMO 2x2 (Ngưỡng chuyển tiếp chế độ $10.10\text{ dB}$).</figcaption>
 </figure>
 
 <figure class="academic-figure">
@@ -1403,19 +1403,19 @@ Báo cáo đồ án đã hoàn thành toàn diện tất cả các mục tiêu l
   <li><strong>Về mặt tính toán giải tích và giải mã tín hiệu từng khối:</strong>
     <ul>
       <li>Đối với hệ thống STBC Alamouti $2 \times 2$ trên kênh thực nghiệm $\mathbf{H} = \begin{bmatrix} 0.7 & 0.3 \\ 0.4 & 0.6 \end{bmatrix}$, báo cáo đã tính toán tường minh các giá trị tín hiệu nhận $r_0 = 1.0 + 0.4j, r_1 = -0.4 - 1.0j, r_2 = 1.0 - 0.2j, r_3 = 0.2 - 1.0j$. Chứng minh bằng toán học cấu trúc trực giao cột hoàn hảo của ma trận kênh hiệu dụng $\mathbf{H}_{eff}^H \mathbf{H}_{eff} = 1.10 \mathbf{I}_2$, qua đó khôi phục chính xác $100\%$ hai ký hiệu gốc $s_0 = 1 + 1j$ và $s_1 = 1 - 1j$ với sai số số học máy tính chỉ $1.11 \times 10^{-16}$.</li>
-      <li>Đối với hệ thống SDM $2 \times 2$, phân tích giải tích đã làm rõ cơ chế của ba kỹ thuật tách sóng: Zero-Forcing (triệt hoàn toàn can nhiễu nhưng gây khuếch đại tạp âm tới $5.0$ và $7.22$ lần); MMSE (tối ưu hóa theo chuẩn sai số toàn phương tối thiểu); và SVD Precoding (chuyển đổi kênh truyền thành 2 kênh con độc lập với độ lợi $\sigma_1 = 1.006$ và $\sigma_2 = 0.297$, hoàn toàn không gây khuếch đại tạp âm).</li>
+      <li>Đối với hệ thống SDM $2 \times 2$, phân tích giải tích đã làm rõ cơ chế của ba kỹ thuật tách sóng: Zero-Forcing (triệt hoàn toàn can nhiễu nhưng gây khuếch đại tạp âm tới $5.0$ và $7.22$ lần); MMSE (tối ưu hóa theo chuẩn sai số toàn phương tối thiểu); và SVD Precoding (chuyển đổi kênh truyền thành 2 kênh con độc lập với độ lợi $\sigma_1 = 1.006$ và $\sigma_2 = 0.297$, bảo toàn tính trắng của tạp âm, song khuếch đại nhiễu kênh con yếu /\sigma_2^2 pprox 11.23$ lần và được giải quyết triệt để nhờ Water-filling).</li>
     </ul>
   </li>
   <li><strong>Về mặt hiệu năng phân tập và tỷ lệ lỗi bit (BER):</strong>
     <ul>
       <li>Chương trình mô phỏng Monte Carlo ($2 \times 10^5$ bit) đã đối chiếu hoàn hảo với các công thức giải tích lý thuyết cho cả 5 cấu hình hệ thống (SISO, SIMO SC, SIMO MRC, MISO Alamouti $2 \times 1$, và MIMO Alamouti $2 \times 2$).</li>
-      <li>Hệ thống MIMO $2 \times 2$ STBC chứng minh đạt được bậc phân tập cực đại $d = N_t N_r = 4$, độ dốc đường cong BER gấp 4 lần SISO. Tại mức lỗi mục tiêu $\text{BER} = 10^{-3}$, MIMO $2 \times 2$ mang lại <strong>độ lợi công suất vượt trội lên tới $16.5\text{ dB}$</strong> so với SISO và $6.6\text{ dB}$ so với MISO $2 \times 1$, giảm thiểu tối đa xác suất rớt gói trong môi trường fading sâu.</li>
+      <li>Hệ thống MIMO $2 \times 2$ STBC chứng minh đạt được bậc phân tập cực đại $d = N_t N_r = 4$, độ dốc đường cong BER gấp 4 lần SISO. Tại mức lỗi mục tiêu $\text{BER} = 10^{-3}$, MIMO $2 \times 2$ mang lại <strong>độ lợi công suất vượt trội lên tới $16.9\text{ dB}$</strong> so với SISO và $6.6\text{ dB}$ so với MISO $2 \times 1$, giảm thiểu tối đa xác suất rớt gói trong môi trường fading sâu.</li>
     </ul>
   </li>
   <li><strong>Về mặt dung lượng và thông lượng truyền dẫn:</strong>
     <ul>
       <li>Kỹ thuật SDM $2 \times 2$ chứng minh khả năng nhân đôi độ dốc dung lượng kênh truyền ở vùng SNR cao ($2\text{ bps/Hz}$ trên mỗi $3\text{ dB}$ công suất tăng thêm), nâng dung lượng tại $\text{SNR} = 30\text{ dB}$ lên tới $17.73\text{ bps/Hz}$ (so với SISO chỉ đạt $9.96\text{ bps/Hz}$).</li>
-      <li>Thuật toán tối ưu hóa công suất Water-filling được làm sáng tỏ với ngưỡng chuyển tiếp chế độ chính xác $\Delta = 10.15\text{ dB}$ trên kênh $\mathbf{H}$ cố định: chuyển dịch mượt mà từ chế độ Beamforming đơn luồng ở SNR thấp sang ghép kênh đa luồng ở SNR cao, mang lại độ lợi dung lượng đáng kể tại vùng phủ sóng biên.</li>
+      <li>Thuật toán tối ưu hóa công suất Water-filling được làm sáng tỏ với ngưỡng chuyển tiếp chế độ chính xác $\Delta = 10.10\text{ dB}$ trên kênh $\mathbf{H}$ cố định: chuyển dịch mượt mà từ chế độ Beamforming đơn luồng ở SNR thấp sang ghép kênh đa luồng ở SNR cao, mang lại độ lợi dung lượng đáng kể tại vùng phủ sóng biên.</li>
     </ul>
   </li>
 </ol>

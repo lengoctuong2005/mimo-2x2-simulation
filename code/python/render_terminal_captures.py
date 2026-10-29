@@ -2,15 +2,23 @@ import os
 import re
 from PIL import Image, ImageDraw, ImageFont
 
-fontPath = "/home/tuong/.local/share/fonts/NerdFonts/JetBrainsMonoNerdFont-Regular.ttf"
-if not os.path.exists(fontPath):
-    fontPath = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
+fontCandidates = [
+    os.path.expanduser("~/.local/share/fonts/NerdFonts/JetBrainsMonoNerdFont-Regular.ttf"),
+    "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+    "/usr/share/fonts/truetype/liberation/LiberationMono-Regular.ttf"
+]
+fontPath = next((f for f in fontCandidates if os.path.exists(f)), None)
 
 fontSize = 15
-font = ImageFont.truetype(fontPath, fontSize)
-fontSmall = ImageFont.truetype(fontPath, 12)
+if fontPath:
+    font = ImageFont.truetype(fontPath, fontSize)
+    fontSmall = ImageFont.truetype(fontPath, 12)
+else:
+    font = ImageFont.load_default()
+    fontSmall = ImageFont.load_default()
 
-figuresDir = "/home/tuong/Desktop/HK1-26-27/ETC10309_TruyenThongKhongDay/DoAn_2026/figures"
+baseDir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+figuresDir = os.path.join(baseDir, "figures")
 os.makedirs(figuresDir, exist_ok=True)
 
 colorBg = (24, 24, 37)
@@ -166,7 +174,7 @@ def renderTerminalImage(windowTitle, rawLines, outputPath):
     img.save(outputPath, "PNG", dpi=(300, 300))
 
 stbcLines = [
-    "tuong@workstation:~/DoAn_2026/code/matlab$ /home/tuong/.local/bin/matlab -nodisplay -r \"mimo_stbc_2x2_recovery; exit;\"",
+    "tuong@workstation:~/DoAn_2026/code/matlab$ matlab -nodisplay -r \"mimo_stbc_2x2_recovery; exit;\"",
     "",
     "                            < M A T L A B (R) >",
     "                  Copyright 1984-2025 The MathWorks, Inc.",
@@ -209,7 +217,7 @@ stbcLines = [
 ]
 
 sdmLines = [
-    "tuong@workstation:~/DoAn_2026/code/matlab$ /home/tuong/.local/bin/matlab -nodisplay -r \"mimo_sdm_2x2_recovery; exit;\"",
+    "tuong@workstation:~/DoAn_2026/code/matlab$ matlab -nodisplay -r \"mimo_sdm_2x2_recovery; exit;\"",
     "",
     "                            < M A T L A B (R) >",
     "                  Copyright 1984-2025 The MathWorks, Inc.",

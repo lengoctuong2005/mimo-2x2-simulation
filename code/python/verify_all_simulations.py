@@ -45,6 +45,11 @@ combinedVectorSvd = leftSingularMatrixU.conj().T @ receivedVectorSvd
 recoveredVectorSvd = combinedVectorSvd / singularValuesS
 errorNormSvd = float(la.norm(recoveredVectorSvd - symbolVectorX))
 
+assert errorStbcS0 < 1e-12 and errorStbcS1 < 1e-12
+assert errorNormZf < 1e-12
+assert errorNormMmse < 1e-12
+assert errorNormSvd < 1e-12
+
 snrBerDbList = [0.0, 5.0, 10.0, 15.0, 20.0, 25.0]
 numBitsSimulation = 500000
 
@@ -203,6 +208,23 @@ for snrDb in snrCapDbList:
         "ergWf": capErgWf,
         "gain": capErgWf - capErgEpa
     })
+
+for row in berResults:
+    assert row["sisoTheo"] > 0
+    assert row["mimoTheo"] > 0
+    assert row["mimoTheo"] < row["sisoTheo"]
+
+for i in range(len(berResults) - 1):
+    assert berResults[i]["sisoTheo"] > berResults[i + 1]["sisoTheo"]
+    assert berResults[i]["mimoTheo"] > berResults[i + 1]["mimoTheo"]
+
+for row in capResults:
+    assert row["fixedWf"] >= row["fixedEpa"] - 1e-9
+    assert row["ergWf"] >= row["ergEpa"] - 1e-9
+
+for i in range(len(capResults) - 1):
+    assert capResults[i]["sisoAwgn"] < capResults[i + 1]["sisoAwgn"]
+    assert capResults[i]["ergWf"] < capResults[i + 1]["ergWf"]
 
 print("=" * 104)
 print("                    MIMO 2x2 WIRELESS COMMUNICATIONS SIMULATION SUMMARY                   ")

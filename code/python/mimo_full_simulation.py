@@ -3,7 +3,8 @@ import numpy as np
 import scipy.linalg as la
 import matplotlib.pyplot as plt
 
-figuresDirectory = "/home/tuong/Desktop/HK1-26-27/ETC10309_TruyenThongKhongDay/DoAn_2026/figures"
+baseDirectory = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+figuresDirectory = os.path.join(baseDirectory, "figures")
 os.makedirs(figuresDirectory, exist_ok=True)
 
 plt.rcParams["font.family"] = "sans-serif"

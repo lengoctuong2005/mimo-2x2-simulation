@@ -12,18 +12,19 @@
 
 ---
 
-## 1. Giới thiệu đề tài (Đề tài P6)
+## 1. Giới thiệu đề tài
 
-Đồ án tập trung nghiên cứu, thiết kế và mô phỏng đánh giá hiệu năng hệ thống truyền thông đa anten thu - phát MIMO $2 \times 2$ (2 anten phát, 2 anten thu) trên cả hai phương diện:
+Đồ án môn học Truyền thông Không dây (Mã HP: ETC10309) thực hiện nghiên cứu chuyên sâu và mô phỏng đánh giá toàn diện hệ thống đa anten thu - phát MIMO $2 \times 2$ (2 anten phát, 2 anten thu). Đề tài kế thừa và phát triển từ đề cương hướng dẫn đồ án môn học (`Ref/Project_Instructions.pdf` với các chủ đề cơ sở P1 về Kênh truyền fading diện hẹp và P2 về Bộ cân bằng ZF/MMSE), mở rộng lên không gian đa chiều $2 \times 2$ cho hai kỹ thuật trụ cột:
 1. **Độ lợi phân tập (Diversity Gain):** Triển khai kỹ thuật mã hóa khối không gian - thời gian **STBC Alamouti $2 \times 2$** để chống fading đa đường và hạ thấp tỷ lệ lỗi bit (BER).
 2. **Độ lợi ghép kênh (Spatial Multiplexing Gain):** Triển khai kỹ thuật ghép kênh không gian **SDM $2 \times 2$** với các bộ tách sóng tuyến tính Zero-Forcing (ZF), Cực tiểu sai số toàn phương trung bình (MMSE) và tiền mã hóa phân rã trị riêng (SVD Precoding) nhằm nhân đôi tốc độ truyền dữ liệu mà không cần tăng băng thông vô tuyến.
 
 ### Thông số khảo sát ban đầu
 - Ma trận kênh truyền thực nghiệm cố định:
   $$\mathbf{H} = \begin{bmatrix} 0.7 & 0.3 \\ 0.4 & 0.6 \end{bmatrix}, \quad \|\mathbf{H}\|_F^2 = 0.7^2 + 0.3^2 + 0.4^2 + 0.6^2 = 1.10$$
-- Vector ký hiệu phát cần khôi phục:
+- Vector ký hiệu phát cần khôi phục (sử dụng chòm sao QPSK chuẩn hóa):
   $$\mathbf{x} = \begin{bmatrix} s_0 \\ s_1 \end{bmatrix} = \begin{bmatrix} 1 + i \\ 1 - i \end{bmatrix}$$
 - Giả định nhiễu cộng ban đầu $\mathbf{n} = \mathbf{0}$.
+- Trong phần khảo sát đường cong BER qua kênh fading Rayleigh (Mục 4), điều chế BPSK được áp dụng để đối chiếu chặt chẽ với các công thức giải tích khép kín kinh điển.
 
 ---
 
@@ -47,9 +48,9 @@
 
 ---
 
-## 3. Ảnh chụp Thực tế Chạy Mô phỏng trên Terminal MATLAB
+## 3. Kết quả Mô phỏng Số Khôi phục Tín hiệu Thực thi trên Terminal
 
-Kết quả chạy thực tế của các file script MATLAB `mimo_stbc_2x2_recovery.m` và `mimo_sdm_2x2_recovery.m`:
+Kết quả mô phỏng số thực thi của các script MATLAB `mimo_stbc_2x2_recovery.m` và `mimo_sdm_2x2_recovery.m`:
 
 | Khôi phục STBC Alamouti 2x2 | Khôi phục SDM 2x2 (ZF, MMSE, SVD) |
 | :---: | :---: |
@@ -59,18 +60,18 @@ Kết quả chạy thực tế của các file script MATLAB `mimo_stbc_2x2_reco
 
 ## 4. Khảo sát Hiệu năng BER và Phân tập Không gian
 
-Mô phỏng Monte Carlo $2 \times 10^5$ bit trên kênh Rayleigh fading độc lập để đánh giá bậc phân tập $d$:
+Mô phỏng Monte Carlo $5 \times 10^5$ bit với điều chế BPSK trên kênh fading Rayleigh độc lập để đánh giá bậc phân tập $d$:
 - **SISO:** Bậc phân tập $d = 1$, đường cong BER suy giảm chậm ($P_e \sim \text{SNR}^{-1}$).
 - **SIMO 1x2 SC:** $d = 2$, chọn nhánh có công suất cao nhất.
 - **SIMO 1x2 MRC:** $d = 2$, tối ưu hóa tỷ số tín hiệu trên nhiễu $\gamma_\Sigma = \gamma_1 + \gamma_2$.
 - **MISO 2x1 Alamouti:** $d = 2$, đạt cùng độ dốc giải tích như MRC nhưng dịch sang phải 3 dB do công suất phát chia đều cho 2 anten phát.
-- **MIMO 2x2 Alamouti STBC:** $d = N_t \times N_r = 4$, độ dốc dốc đứng, lao nhanh xuống vùng lỗi thấp.
+- **MIMO 2x2 Alamouti STBC:** $d = N_t \times N_r = 4$, độ dốc lớn, suy giảm nhanh xuống vùng lỗi thấp.
 
 ![BER Comparison](figures/fig3_ber_diversity_comparison.png)
 
 ### Lợi ích tiết kiệm công suất:
-- Tại mức $\text{BER} = 10^{-3}$, SISO yêu cầu $\text{SNR} = 24.0\text{ dB}$, trong khi MIMO $2 \times 2$ STBC chỉ cần $\text{SNR} = 7.5\text{ dB}$, giúp **tiết kiệm $16.5\text{ dB}$ công suất phát**.
-- Tại $\text{SNR} = 10\text{ dB}$, tỷ lệ lỗi của MIMO $2 \times 2$ STBC thấp hơn SISO **hơn 218 lần**.
+- Tại mức $\text{BER} = 10^{-3}$, SISO yêu cầu $\text{SNR} \approx 24.0\text{ dB}$ ($23.97\text{ dB}$), trong khi MIMO $2 \times 2$ STBC chỉ cần $\text{SNR} \approx 7.05\text{ dB}$, giúp **tiết kiệm $16.9\text{ dB}$ công suất phát** (giảm xấp xỉ **49 lần** công suất phát). SIMO 1x2 SC cần $12.6\text{ dB}$, SIMO 1x2 MRC cần $11.1\text{ dB}$, MISO 2x1 Alamouti cần $14.1\text{ dB}$.
+- Tại $\text{SNR} = 10\text{ dB}$, tỷ lệ lỗi của MIMO $2 \times 2$ STBC thấp hơn SISO **khoảng 205 lần theo lý thuyết giải tích** (và hơn 218 lần trong tập mẫu thực nghiệm mô phỏng).
 
 ---
 
@@ -83,7 +84,7 @@ $$C = \sum_{i=1}^{\min(N_t, N_r)} \log_2 \left(1 + \frac{P_i \sigma_i^2}{N_0}\ri
 
 ### Đặc tính ghép kênh không gian và Water-filling:
 - **Tốc độ ghép kênh:** Ở vùng SNR cao ($> 15\text{ dB}$), độ dốc dung lượng của MIMO $2 \times 2$ SDM đạt xấp xỉ $2\text{ bps/Hz / }3\text{ dB}$, gấp đôi SISO. Tại $\text{SNR} = 20\text{ dB}$, dung lượng đạt $11.28\text{ bps/Hz}$ so với $5.89\text{ bps/Hz}$ của SISO.
-- **Thuật toán Water-filling:** Ngưỡng chuyển tiếp chế độ trên kênh $\mathbf{H}$ cố định là $\text{SNR}_{th} = 10.15\text{ dB}$. Dưới ngưỡng này, thuật toán dồn 100% công suất vào kênh con mạnh ($\sigma_1 = 1.0055$) đóng vai trò như Beamforming. Trên $10.15\text{ dB}$, cả hai kênh con đều được cấp phát công suất để nhân đôi tốc độ truyền.
+- **Thuật toán Water-filling:** Ngưỡng chuyển tiếp chế độ trên kênh $\mathbf{H}$ cố định là $\text{SNR}_{th} = 10 \log_{10}(1/\lambda_2 - 1/\lambda_1) = 10 \log_{10}(10.244) \approx 10.10\text{ dB}$ (khớp với mốc $10.1\text{ dB}$ trên đồ thị). Dưới ngưỡng này, thuật toán dồn 100% công suất vào kênh con mạnh ($\sigma_1 = 1.0055$) đóng vai trò như Beamforming. Trên $10.10\text{ dB}$, cả hai kênh con đều được cấp phát công suất để nhân đôi tốc độ truyền.
 
 ![Waterfilling Allocation](figures/fig5_waterfilling_allocation.png)
 
@@ -117,7 +118,7 @@ $$C = \sum_{i=1}^{\min(N_t, N_r)} \log_2 \left(1 + \frac{P_i \sigma_i^2}{N_0}\ri
 │       └── verify_all_simulations.py         # Suite kiểm thử giải tích tự động
 ├── figures/                                  # 8 hình ảnh đồ thị và bằng chứng terminal độ phân giải cao
 └── Ref/
-    └── Project_Instructions.pdf              # Đề cương yêu cầu đề tài đồ án P6
+    └── Project_Instructions.pdf              # Đề cương hướng dẫn đồ án môn học (nền tảng P1, P2)
 ```
 
 ---

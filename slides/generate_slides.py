@@ -27,7 +27,9 @@ def create_deck():
     prs.slide_height = Inches(SLIDE_HEIGHT)
     blank_layout = prs.slide_layouts[6]
 
-    figures_dir = "/home/tuong/Desktop/HK1-26-27/ETC10309_TruyenThongKhongDay/DoAn_2026/figures"
+    slides_dir = os.path.dirname(os.path.abspath(__file__))
+    base_dir = os.path.dirname(slides_dir)
+    figures_dir = os.path.join(base_dir, "figures")
 
     def set_slide_background(slide, color):
         bg = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, 0, 0, Inches(SLIDE_WIDTH), Inches(SLIDE_HEIGHT))
@@ -319,13 +321,13 @@ def create_deck():
         "Mô hình hệ thống: 2 anten phát (Tx1, Tx2) và 2 anten thu (Rx1, Rx2).",
         "Môi trường vô tuyến: Kênh fading phẳng Rayleigh biến đổi chậm (quasi-static) cộng nhiễu tạp âm trắng Gauss (AWGN).",
         "Độ chính xác thuật toán: Chứng minh giải tích triệt can nhiễu, sai số khôi phục đạt mức epsilon máy tính (< 1e-15).",
-        "Kiểm chứng độc lập: Xây dựng đồng thời hai bộ mã nguồn kiểm chứng chéo trên MATLAB R2026 và Python 3.12 (NumPy/SciPy)."
+        "Kiểm chứng độc lập: Xây dựng đồng thời hai bộ mã nguồn kiểm chứng chéo trên MATLAB R2025b và Python 3.12 (NumPy/SciPy)."
     ]
     add_bullet_points(tf2_right, items2_right, 11, 7)
 
-    add_stat_tile(slide2, 0.8, 5.5, 3.7, 1.3, "Bậc phân tập tối đa", "d = 4", "MIMO 2x2 STBC tiết kiệm 16.5 dB công suất", TEAL)
+    add_stat_tile(slide2, 0.8, 5.5, 3.7, 1.3, "Bậc phân tập tối đa", "d = 4", "MIMO 2x2 STBC tiết kiệm 16.9 dB công suất (49 lần)", TEAL)
     add_stat_tile(slide2, 4.816, 5.5, 3.7, 1.3, "Ghép kênh song song", "r = 2 luồng", "Nhân đôi hiệu suất phổ bps/Hz không tốn băng thông", CYAN)
-    add_stat_tile(slide2, 8.833, 5.5, 3.7, 1.3, "Ngưỡng Water-filling", "10.15 dB", "Chuyển mượt từ Beamforming sang Ghép kênh", NAVY)
+    add_stat_tile(slide2, 8.833, 5.5, 3.7, 1.3, "Ngưỡng Water-filling", "10.10 dB", "Chuyển mượt từ Beamforming sang Ghép kênh", NAVY)
 
     slide3 = prs.slides.add_slide(blank_layout)
     add_header(slide3, "Kiến trúc Tổng quan Mô hình Hệ thống MIMO 2x2", "Kiến trúc hệ thống", 3)
@@ -592,8 +594,8 @@ def create_deck():
         "Phân rã kênh: H = U Σ V^H",
         "Phát tiền mã hóa: x_tx = V x",
         "Thu lọc không gian: y_tilde = U^H y = Σ x + n_tilde",
-        "Kênh trực giao song song: Chuyển đổi thành 2 kênh con độc lập tuyệt đối.",
-        "Ưu thế vượt trội: Hoàn toàn không gây khuếch đại tạp âm, song đòi hỏi cả CSIT và CSIR."
+        "Triệt can nhiễu đa luồng: Chuyển đổi thành 2 kênh con song song không xuyên kênh.",
+        "Đặc tính tạp âm: Giữ trắng tạp âm giữa các luồng, song khôi phục kênh con yếu (σ_2) vẫn bị khuếch đại nhiễu; Water-filling tối ưu phân bổ."
     ]
     add_bullet_points(tf8_c3, items8_c3, 10.5, 6)
 
@@ -632,11 +634,11 @@ def create_deck():
     tf10_left = tb10_left.text_frame
     tf10_left.word_wrap = True
     items10_left = [
-        "Phân rã giá trị kỳ dị: H = U Σ V^H\n  U, V là các ma trận unita (U^H U = I, V^H V = I)\n  Σ = diag(σ_1, σ_2) = diag(1.00596, 0.29671)",
+        "Phân rã giá trị kỳ dị: H = U Σ V^H\n  U, V là các ma trận unita (U^H U = I, V^H V = I)\n  Σ = diag(σ_1, σ_2) = diag(1.0055, 0.2984), κ(H) = 3.37",
         "Khối phát nhân ma trận tiền mã hóa: x_tx = V x",
         "Khối thu nhân ma trận lọc không gian: y_tilde = U^H y\n  y_tilde = U^H (H V x + n) = Σ x + U^H n = Σ x + n_tilde",
-        "Hai kênh con trực giao song song hoàn toàn độc lập:\n  y_tilde_1 = 1.00596 x1 + n_tilde_1\n  y_tilde_2 = 0.29671 x2 + n_tilde_2",
-        "Bảo toàn phân bố tạp âm:\n  Do U là ma trận unita nên R_n_tilde = σ_n^2 U^H U = σ_n^2 I_2.\n  => Hoàn toàn không bị khuếch đại tạp âm!",
+        "Hai kênh con trực giao song song không can nhiễu luồng:\n  y_tilde_1 = 1.0055 x1 + n_tilde_1\n  y_tilde_2 = 0.2984 x2 + n_tilde_2",
+        "Đặc tính tạp âm & Khôi phục:\n  Do U là ma trận unita nên R_n_tilde = σ_n^2 U^H U = σ_n^2 I_2 (giữ trắng tạp âm).\n  Khi tách ký hiệu x_hat_i = y_tilde_i / σ_i, phương sai nhiễu luồng 2 tăng 1/σ_2^2 ≈ 11.23 lần. SVD loại bỏ hoàn toàn can nhiễu chéo, cho phép Water-filling tối ưu hóa.",
         "Sai số khôi phục mô phỏng: 9.42e-16"
     ]
     add_bullet_points(tf10_left, items10_left, 10, 6)
@@ -656,7 +658,7 @@ def create_deck():
     p10_c.alignment = PP_ALIGN.CENTER
 
     slide11 = prs.slides.add_slide(blank_layout)
-    add_header(slide11, "Ảnh chụp Kết quả Chạy Mô phỏng Thực tế trên Terminal MATLAB", "Kiểm chứng thực tế", 11)
+    add_header(slide11, "Kết quả Mô phỏng Số Khôi phục Tín hiệu Thực thi trên MATLAB", "Kiểm chứng thực tế", 11)
 
     add_card_header(slide11, 0.8, 1.5, 5.7, 5.3, "Mô phỏng STBC Alamouti (Terminal)", NAVY)
     term_stbc_path = os.path.join(figures_dir, "term_capture_stbc_matlab.png")
@@ -666,7 +668,7 @@ def create_deck():
     tf11_cap1 = tb11_cap1.text_frame
     tf11_cap1.word_wrap = True
     p11_c1 = tf11_cap1.paragraphs[0]
-    p11_c1.text = "Xác thực mô phỏng STBC: Tính toán 4 giá trị r0..r3, H_eff trực giao, khôi phục x0, x1 với sai số 1.11e-16."
+    p11_c1.text = "Mô phỏng STBC: Tính toán 4 giá trị r0..r3, H_eff trực giao, khôi phục x0, x1 với sai số máy tính 2.22e-16 (MATLAB) / 1.11e-16 (Python)."
     p11_c1.font.name = "Arial"
     p11_c1.font.size = Pt(9.5)
     p11_c1.font.color.rgb = TEXT_MUTED
@@ -680,7 +682,7 @@ def create_deck():
     tf11_cap2 = tb11_cap2.text_frame
     tf11_cap2.word_wrap = True
     p11_c2 = tf11_cap2.paragraphs[0]
-    p11_c2.text = "Xác thực mô phỏng SDM: Nghịch đảo ZF, hệ số khuếch đại nhiễu 5.0x và 7.2x, kiểm chứng MMSE và SVD."
+    p11_c2.text = "Mô phỏng SDM: Nghịch đảo ZF, hệ số khuếch đại nhiễu 5.0x và 7.22x, kiểm chứng MMSE và SVD (sai số < 1.05e-15)."
     p11_c2.font.name = "Arial"
     p11_c2.font.size = Pt(9.5)
     p11_c2.font.color.rgb = TEXT_MUTED
@@ -748,9 +750,9 @@ def create_deck():
     tf13_right = tb13_right.text_frame
     tf13_right.word_wrap = True
     items13_right = [
-        "Kiểm chứng mô phỏng Monte Carlo:\nCác điểm mô phỏng 2x10^5 bit (markers) trùng khớp tuyệt đối với các đường cong lý thuyết giải tích liên tục trên toàn dải SNR từ 0 đến 25 dB.",
+        "Kiểm chứng mô phỏng Monte Carlo:\nCác điểm mô phỏng 5x10^5 bit (markers) khớp tốt với các đường cong lý thuyết giải tích liên tục trên toàn dải SNR từ 0 đến 25 dB.",
         "Khác biệt độ dốc (Slope):\nĐường cong MIMO 2x2 STBC có độ dốc d = 4 dốc đứng nhất, lao nhanh xuống vùng lỗi thấp khi SNR tăng.",
-        "So sánh tại mốc SNR = 10 dB:\n• SISO: BER = 2.31 x 10^-2 (Lỗi cao)\n• SIMO SC: BER = 2.99 x 10^-3\n• MISO 2x1: BER = 5.53 x 10^-3\n• SIMO MRC: BER = 1.60 x 10^-3\n• MIMO 2x2 STBC: BER = 1.06 x 10^-4\n  => MIMO 2x2 giảm lỗi hơn 218 lần so với SISO!",
+        "So sánh tại mốc SNR = 10 dB:\n• SISO: BER = 2.31 x 10^-2 (Lỗi cao)\n• SIMO SC: BER = 2.99 x 10^-3\n• MISO 2x1: BER = 5.53 x 10^-3\n• SIMO MRC: BER = 1.60 x 10^-3\n• MIMO 2x2 STBC: BER = 1.06 x 10^-4\n  => MIMO 2x2 giảm lỗi 218 lần trong mô phỏng (lý thuyết giải tích: 205 lần) so với SISO!",
         "Vùng SNR > 15 dB:\nHiệu năng MIMO 2x2 STBC đạt dưới 10^-5, không ghi nhận bất kỳ bit lỗi nào trong tập dữ liệu mô phỏng."
     ]
     add_bullet_points(tf13_right, items13_right, 10, 6)
@@ -761,11 +763,11 @@ def create_deck():
     add_card_header(slide14, 0.8, 1.5, 6.2, 5.3, "Đối chiếu SNR yêu cầu tại BER = 10^-3", NAVY)
     headers14 = ["Cấu hình anten", "Bậc d", "SNR cần (dB)", "Độ lợi SNR (dB)"]
     rows14 = [
-        ["SISO (1x1)", "1", "23.9 dB", "0.0 dB (Chuẩn)"],
-        ["MISO 2x1 (Alamouti)", "2", "14.0 dB", "+9.9 dB"],
-        ["SIMO 1x2 (SC)", "2", "13.5 dB", "+10.4 dB"],
-        ["SIMO 1x2 (MRC)", "2", "11.0 dB", "+12.9 dB"],
-        ["MIMO 2x2 (Alamouti STBC)", "4", "7.4 dB", "+16.5 dB (Vượt trội)"]
+        ["SISO (1x1)", "1", "24.0 dB", "0.0 dB (Chuẩn)"],
+        ["MISO 2x1 (Alamouti)", "2", "14.1 dB", "+9.9 dB"],
+        ["SIMO 1x2 (SC)", "2", "12.6 dB", "+11.4 dB"],
+        ["SIMO 1x2 (MRC)", "2", "11.1 dB", "+12.9 dB"],
+        ["MIMO 2x2 (Alamouti STBC)", "4", "7.05 dB", "+16.9 dB (Vượt trội)"]
     ]
     add_table_data(slide14, 0.95, 2.1, 5.9, 2.5, headers14, rows14, [2.2, 0.8, 1.4, 1.5])
 
@@ -773,8 +775,8 @@ def create_deck():
     tf14_sub = tb14_sub.text_frame
     tf14_sub.word_wrap = True
     items14_sub = [
-        "Độ lợi công suất vượt bậc: MIMO 2x2 STBC chỉ cần 7.4 dB để đạt BER = 10^-3, tiết kiệm tới 16.5 dB so với SISO (23.9 dB).",
-        "Ý nghĩa thực tiễn: Giảm công suất phát của máy phát đi xấp xỉ 45 lần mà vẫn duy trì chất lượng đường truyền tương đương."
+        "Độ lợi công suất vượt bậc: MIMO 2x2 STBC chỉ cần 7.05 dB để đạt BER = 10^-3, tiết kiệm tới 16.9 dB so với SISO (24.0 dB).",
+        "Ý nghĩa thực tiễn: Giảm công suất phát của máy phát đi xấp xỉ 49 lần mà vẫn duy trì chất lượng đường truyền tương đương."
     ]
     add_bullet_points(tf14_sub, items14_sub, 10.5, 6)
 
@@ -785,7 +787,7 @@ def create_deck():
     items14_right = [
         "Độ lợi phân tập (Diversity Gain):\nTăng bậc phân tập từ d=1 lên d=4 làm thay đổi căn bản độ dốc của đường cong BER, giúp loại bỏ hầu như hoàn toàn nguy cơ fading sâu đa đường.",
         "Độ lợi mảng (Array Gain):\nNhờ có 2 anten thu (N_r = 2), công suất tín hiệu thu thập tăng gấp 2 lần (+3 dB độ lợi mảng), giải thích vì sao SIMO MRC tốt hơn MISO Alamouti đúng 3 dB dù cùng bậc phân tập d=2.",
-        "Tác động thương mại viễn thông:\nTiết kiệm 16.5 dB công suất đồng nghĩa với việc gia tăng thời lượng sử dụng pin của thiết bị di động, kéo dài tầm phủ sóng của trạm gốc, và giảm phát thải can nhiễu vào môi trường vô tuyến."
+        "Tác động thương mại viễn thông:\nTiết kiệm 16.9 dB công suất (xấp xỉ 49 lần) đồng nghĩa với việc gia tăng thời lượng sử dụng pin của thiết bị di động, kéo dài tầm phủ sóng của trạm gốc, và giảm phát thải can nhiễu vào môi trường vô tuyến."
     ]
     add_bullet_points(tf14_right, items14_right, 10.5, 7)
 
@@ -842,8 +844,8 @@ def create_deck():
     items16_left = [
         "Bài toán tối ưu hóa lồi:\n  max ∑_{i=1}^2 log2( 1 + p_i σ_i^2 / N0 )  thỏa  p1 + p2 = P_t",
         "Lời giải Kuhn-Tucker (KKT):\n  p_i = max( 0,  μ - N0 / σ_i^2 )   (Mức ngập nước μ)",
-        "Mức chênh lệch đáy bồn trên kênh H = [0.7 0.3; 0.4 0.6]:\n  Δ = 1/σ_2^2 - 1/σ_1^2 = 11.358 - 0.988 = 10.370\n  => Tương ứng với ngưỡng SNR_th ≈ 10.15 dB",
-        "Hai chế độ hoạt động rõ rệt:\n  • SNR ≤ 10.15 dB: Nước chưa ngập đáy 2 => p1 = P_t, p2 = 0.\n    Hệ thống tự động chuyển sang chế độ Eigen-Beamforming (dồn 100% công suất vào kênh con mạnh nhất).\n  • SNR > 10.15 dB: Nước tràn sang đáy 2 => Cả 2 kênh con đều có công suất. Chuyển sang Ghép kênh đa luồng.",
+        "Mức chênh lệch đáy bồn trên kênh H = [0.7 0.3; 0.4 0.6]:\n  Δ = 1/σ_2^2 - 1/σ_1^2 = 11.233 - 0.989 = 10.244\n  => Tương ứng với ngưỡng SNR_th = 10 log10(10.244) ≈ 10.10 dB",
+        "Hai chế độ hoạt động rõ rệt:\n  • SNR ≤ 10.10 dB: Nước chưa ngập đáy 2 => p1 = P_t, p2 = 0.\n    Hệ thống tự động chuyển sang chế độ Eigen-Beamforming (dồn 100% công suất vào kênh con mạnh nhất).\n  • SNR > 10.10 dB: Nước tràn sang đáy 2 => Cả 2 kênh con đều có công suất. Chuyển sang Ghép kênh đa luồng.",
         "Tiệm cận: Khi SNR → ∞, tỷ lệ p1/p2 → 1, Water-filling hội tụ hoàn toàn về phân bổ đều (EPA)."
     ]
     add_bullet_points(tf16_left, items16_left, 10, 6)
@@ -856,7 +858,7 @@ def create_deck():
     tf16_cap = tb16_cap.text_frame
     tf16_cap.word_wrap = True
     p16_c = tf16_cap.paragraphs[0]
-    p16_c.text = "Hình 4.2: Minh họa phân bổ công suất tối ưu Water-filling trên kênh MIMO 2x2 (Ngưỡng chuyển tiếp chế độ 10.15 dB)."
+    p16_c.text = "Hình 4.2: Minh họa phân bổ công suất tối ưu Water-filling trên kênh MIMO 2x2 (Ngưỡng chuyển tiếp chế độ 10.10 dB)."
     p16_c.font.name = "Arial"
     p16_c.font.size = Pt(9.5)
     p16_c.font.color.rgb = TEXT_MUTED
@@ -894,8 +896,8 @@ def create_deck():
     tf17_sub = tb17_sub.text_frame
     tf17_sub.word_wrap = True
     items17_sub = [
-        "Vùng SNR thấp (< 10 dB): EPA bị suy thoái do lãng phí công suất vào kênh con yếu (σ_2=0.297). Water-filling khắc phục triệt để bằng cách dồn lực cho kênh con mạnh.",
-        "Vùng SNR cao (> 20 dB): MIMO 2x2 bứt phá vượt trội so với SISO (+4.52 bps/Hz tại 20 dB và +7.77 bps/Hz tại 30 dB trên kênh ergodic)."
+        "Vùng SNR thấp (< 10 dB): EPA bị suy thoái do lãng phí công suất vào kênh con yếu (σ_2=0.298). Water-filling khắc phục triệt để bằng cách dồn lực cho kênh con mạnh.",
+        "Vùng SNR cao (> 20 dB): MIMO 2x2 bứt phá vượt trội so với SISO (+4.65 bps/Hz tại 20 dB và +7.77 bps/Hz tại 30 dB trên kênh ergodic)."
     ]
     add_bullet_points(tf17_sub, items17_sub, 10, 5)
 
@@ -907,19 +909,20 @@ def create_deck():
     tf18_left = tb18_left.text_frame
     tf18_left.word_wrap = True
     items18_left = [
-        "Hệ thức đánh đổi DMT cho hệ thống MIMO 2x2:\n  d(r) = (N_t - r)(N_r - r) = (2 - r)^2   với  0 ≤ r ≤ 2",
-        "Bản chất vật lý: Cùng một số lượng anten trong không gian, hệ thống không thể đồng thời tối đa hóa cả độ tin cậy và tốc độ truyền dữ liệu.",
-        "Cực biên 1 (r = 0): Đạt bậc phân tập tối đa d_max = 4  ⇒  Kỹ thuật STBC Alamouti (Tối đa tin cậy, chống fading sâu).",
-        "Cực biên 2 (d = 0): Đạt tốc độ ghép kênh tối đa r_max = 2  ⇒  Kỹ thuật SDM (Tối đa thông lượng, nhân đôi tốc độ)."
+        "Hệ thức đánh đổi DMT Zheng - Tse (2003) cho MIMO 2x2:\n  d*(r) là đường gấp khúc tuyến tính từng đoạn nối 3 điểm (0, 4) -> (1, 1) -> (2, 0):\n  • 0 ≤ r ≤ 1: d*(r) = 4 - 3r\n  • 1 ≤ r ≤ 2: d*(r) = 2 - r",
+        "Bản chất vật lý: Cùng cấu hình anten, không thể đồng thời tối đa hóa cả độ tin cậy và tốc độ ghép kênh.",
+        "Cực biên phân tập (r = 0): Đạt bậc phân tập tối đa d_max = 4 ⇒ Kỹ thuật STBC Alamouti (Tối đa tin cậy, chống fading sâu).",
+        "Cực biên ghép kênh (r = 2): Đạt tốc độ ghép kênh tối đa r_max = 2 ⇒ Kỹ thuật SDM (Tối đa thông lượng, d = 0 tại r=2).",
+        "Phân tập máy thu SDM: Ở tốc độ cố định với bộ tách sóng tuyến tính ZF/MMSE, mỗi luồng đạt bậc phân tập d = N_r - N_t + 1 = 1."
     ]
-    add_bullet_points(tf18_left, items18_left, 10.5, 6)
+    add_bullet_points(tf18_left, items18_left, 10, 5)
 
     add_card_header(slide18, 6.833, 1.5, 5.7, 3.5, "Bảng so sánh tổng hợp STBC vs SDM", DARK_BLUE)
     headers18 = ["Tiêu chí", "STBC Alamouti", "Ghép kênh SDM"]
     rows18 = [
         ["Mục tiêu cốt lõi", "Tối đa độ tin cậy (chống lỗi)", "Tối đa tốc độ (thông lượng)"],
         ["Tốc độ mã hóa R", "R = 1 ký hiệu/khe (như SISO)", "R = 2 ký hiệu/khe (nhân đôi)"],
-        ["Bậc phân tập d", "d = 4 (Cực đại)", "d = 0 (với tách sóng ZF)"],
+        ["Bậc phân tập d", "d = 4 (Cực đại)", "d = 1 (ZF/MMSE cố định) / d = 0 (tại r=2)"],
         ["Phức tạp máy thu", "Rất thấp (kết hợp tuyến tính)", "Trung bình / cao (đảo ma trận)"],
         ["Yêu cầu CSI", "Chỉ cần CSIR tại bộ thu", "Cần CSIR (ZF/MMSE), CSIT (SVD)"]
     ]
@@ -945,8 +948,8 @@ def create_deck():
         ["Sai số khôi phục SDM ZF", "0.0 (Tuyệt đối)", "1.05 x 10^-15", "Khôi phục hoàn hảo"],
         ["Khuếch đại nhiễu ZF", "5.0x và 7.22x", "5.000x và 7.222x", "Trùng khớp 100%"],
         ["Bậc phân tập MIMO 2x2", "d = 4", "d = 4 (khớp độ dốc)", "Độ dốc gấp 4 lần SISO"],
-        ["Độ lợi SNR tại BER 10^-3", "+16.5 dB", "+16.5 dB", "Tiết kiệm 45x công suất"],
-        ["Ngưỡng chuyển đổi WF", "10.15 dB", "10.15 dB", "Chuyển tiếp chính xác"],
+        ["Độ lợi SNR tại BER 10^-3", "+16.9 dB", "+16.9 dB", "Tiết kiệm ~49x công suất"],
+        ["Ngưỡng chuyển đổi WF", "10.10 dB", "10.10 dB", "Chuyển tiếp chính xác"],
         ["Độ dốc dung lượng SDM", "2 bps/Hz / 3dB", "2.0 bps/Hz / 3dB", "Nhân đôi hiệu suất phổ"]
     ]
     add_table_data(slide19, 0.95, 2.05, 6.4, 4.5, headers19, rows19, [2.1, 1.4, 1.4, 1.5])
@@ -985,10 +988,10 @@ def create_deck():
     tf20_c2 = tb20_c2.text_frame
     tf20_c2.word_wrap = True
     items20_c2 = [
-        "Xây dựng thành công bộ mô phỏng Monte Carlo 2x10^5 bit trên cả hai nền tảng MATLAB và Python.",
-        "Kiểm chứng tính đúng đắn: Các đường cong mô phỏng BER và dung lượng Shannon trùng khớp hoàn hảo với các mô hình giải tích khép kín.",
-        "Xác thực độ lợi phân tập d=4 và độ lợi SNR +16.5 dB tại BER=10^-3 của hệ thống MIMO 2x2 Alamouti.",
-        "Khẳng định ngưỡng Water-filling 10.15 dB phân định rõ 2 chế độ Beamforming và Ghép kênh."
+        "Xây dựng thành công bộ mô phỏng Monte Carlo 5x10^5 bit trên cả hai nền tảng MATLAB và Python.",
+        "Kiểm chứng tính đúng đắn: Các đường cong mô phỏng BER và dung lượng Shannon khớp tốt với các mô hình giải tích khép kín.",
+        "Xác thực độ lợi phân tập d=4 và độ lợi SNR +16.9 dB tại BER=10^-3 của hệ thống MIMO 2x2 Alamouti (tiết kiệm ~49 lần công suất).",
+        "Khẳng định ngưỡng Water-filling 10.10 dB phân định rõ 2 chế độ Beamforming và Ghép kênh."
     ]
     add_bullet_points(tf20_c2, items20_c2, 10.5, 7)
 
@@ -1088,7 +1091,7 @@ def create_deck():
     p21_p.font.color.rgb = WHITE
     p21_p.alignment = PP_ALIGN.CENTER
 
-    output_pptx = "/home/tuong/Desktop/HK1-26-27/ETC10309_TruyenThongKhongDay/DoAn_2026/slides/Slide_ThuyetTrinh_MIMO_2026.pptx"
+    output_pptx = os.path.join(slides_dir, "Slide_ThuyetTrinh_MIMO_2026.pptx")
     prs.save(output_pptx)
     print(f"SAVED_PPTX: {output_pptx} with {len(prs.slides)} slides")
 
