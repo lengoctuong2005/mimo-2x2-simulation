@@ -18,10 +18,12 @@
 1. **Độ lợi phân tập (Diversity Gain):** Triển khai kỹ thuật mã hóa khối không gian - thời gian **STBC Alamouti $2 \times 2$** để chống fading đa đường và hạ thấp tỷ lệ lỗi bit (BER).
 2. **Độ lợi ghép kênh (Spatial Multiplexing Gain):** Triển khai kỹ thuật ghép kênh không gian **SDM $2 \times 2$** với các bộ tách sóng tuyến tính Zero-Forcing (ZF), Cực tiểu sai số toàn phương trung bình (MMSE) và tiền mã hóa phân rã trị riêng (SVD Precoding) nhằm nhân đôi tốc độ truyền dữ liệu mà không cần tăng băng thông vô tuyến.
 
+Phạm vi nghiệm thu là MIMO $2 \times 2$: STBC, SDM, BER phân tập và dung lượng. Các khảo sát P1/P2 trong `Ref/Project_Instructions.pdf`, gồm `comm.RayleighChannel`, coherence, fading chọn lọc tần số và outage, không thuộc phần cài đặt này.
+
 ### Thông số khảo sát ban đầu
 - Ma trận kênh truyền thực nghiệm cố định:
   $$\mathbf{H} = \begin{bmatrix} 0.7 & 0.3 \\ 0.4 & 0.6 \end{bmatrix}, \quad \|\mathbf{H}\|_F^2 = 0.7^2 + 0.3^2 + 0.4^2 + 0.6^2 = 1.10$$
-- Vector ký hiệu phát cần khôi phục (sử dụng chòm sao QPSK chuẩn hóa):
+- Vector ký hiệu phát cần khôi phục dùng QPSK chưa chuẩn hóa, năng lượng ký hiệu $E_s = 2$:
   $$\mathbf{x} = \begin{bmatrix} s_0 \\ s_1 \end{bmatrix} = \begin{bmatrix} 1 + i \\ 1 - i \end{bmatrix}$$
 - Giả định nhiễu cộng ban đầu $\mathbf{n} = \mathbf{0}$.
 - Trong phần khảo sát đường cong BER qua kênh fading Rayleigh (Mục 4), điều chế BPSK được áp dụng để đối chiếu chặt chẽ với các công thức giải tích khép kín kinh điển.
@@ -48,9 +50,9 @@
 
 ---
 
-## 3. Kết quả Mô phỏng Số Khôi phục Tín hiệu Thực thi trên Terminal
+## 3. Minh họa Kết quả Khôi phục Tín hiệu trên Terminal
 
-Kết quả mô phỏng số thực thi của các script MATLAB `mimo_stbc_2x2_recovery.m` và `mimo_sdm_2x2_recovery.m`:
+Các ảnh dưới được dựng từ văn bản nhúng trong `code/python/render_terminal_captures.py`, là hình minh họa, không phải ảnh chụp phiên thực thi trực tiếp:
 
 | Khôi phục STBC Alamouti 2x2 | Khôi phục SDM 2x2 (ZF, MMSE, SVD) |
 | :---: | :---: |
@@ -68,6 +70,8 @@ Mô phỏng Monte Carlo $5 \times 10^5$ bit với điều chế BPSK trên kênh
 - **MIMO 2x2 Alamouti STBC:** $d = N_t \times N_r = 4$, độ dốc lớn, suy giảm nhanh xuống vùng lỗi thấp.
 
 ![BER Comparison](figures/fig3_ber_diversity_comparison.png)
+
+Không ghi nhận lỗi trong tập mẫu hữu hạn không có nghĩa BER thực bằng 0. Kênh Alamouti giữ nguyên trong hai khe thời gian của một khối và độc lập giữa các khối; giới hạn thống kê cần xét theo số khối, không coi mọi bit là độc lập.
 
 ### Lợi ích tiết kiệm công suất:
 - Tại mức $\text{BER} = 10^{-3}$, SISO yêu cầu $\text{SNR} \approx 24.0\text{ dB}$ ($23.97\text{ dB}$), trong khi MIMO $2 \times 2$ STBC chỉ cần $\text{SNR} \approx 7.05\text{ dB}$, giúp **tiết kiệm $16.9\text{ dB}$ công suất phát** (giảm xấp xỉ **49 lần** công suất phát). SIMO 1x2 SC cần $12.6\text{ dB}$, SIMO 1x2 MRC cần $11.1\text{ dB}$, MISO 2x1 Alamouti cần $14.1\text{ dB}$.
@@ -114,9 +118,9 @@ $$C = \sum_{i=1}^{\min(N_t, N_r)} \log_2 \left(1 + \frac{P_i \sigma_i^2}{N_0}\ri
 │   │   └── mimo_capacity_simulation.m        # Mô phỏng Dung lượng Shannon & Water-filling
 │   └── python/                               # Bộ mã nguồn kiểm chứng bằng Python
 │       ├── mimo_full_simulation.py           # Core tính toán khoa học (NumPy, SciPy, Matplotlib)
-│       ├── render_terminal_captures.py       # Script sinh ảnh chụp terminal thực tế
+│       ├── render_terminal_captures.py       # Script dựng ảnh minh họa terminal từ văn bản nhúng
 │       └── verify_all_simulations.py         # Suite kiểm thử giải tích tự động
-├── figures/                                  # 8 hình ảnh đồ thị và bằng chứng terminal độ phân giải cao
+├── figures/                                  # 8 hình đồ thị và minh họa terminal độ phân giải cao
 └── Ref/
     └── Project_Instructions.pdf              # Đề cương hướng dẫn đồ án môn học (nền tảng P1, P2)
 ```

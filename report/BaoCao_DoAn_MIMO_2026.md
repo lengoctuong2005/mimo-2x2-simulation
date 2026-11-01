@@ -111,12 +111,12 @@ Under quasi-static Rayleigh flat fading channels, extensive Monte Carlo simulati
 
 - **Hình 2.1:** Quá trình khôi phục ký hiệu và chòm sao tín hiệu hệ thống MIMO 2x2 STBC Alamouti (Sai số $\approx 1.11 \times 10^{-16}$).
 - **Hình 2.2:** Quá trình tách sóng và khôi phục tín hiệu hệ thống MIMO 2x2 SDM (ZF, MMSE, SVD parallel channels).
-- **Hình 2.3:** Kết quả xác thực mô phỏng khối STBC Alamouti 2x2 trên Terminal MATLAB.
-- **Hình 2.4:** Kết quả xác thực mô phỏng khối SDM 2x2 trên Terminal MATLAB.
+- **Hình 2.3:** Hình ảnh minh họa kết quả mô phỏng khối STBC Alamouti 2x2 từ dữ liệu nhúng qua giao diện Terminal MATLAB.
+- **Hình 2.4:** Hình ảnh minh họa kết quả mô phỏng khối SDM 2x2 từ dữ liệu nhúng qua giao diện Terminal MATLAB.
 - **Hình 3.1:** Đồ thị khảo sát hiệu năng BER giữa các kỹ thuật phân tập không gian (SISO, SIMO SC/MRC, MISO 2x1, MIMO 2x2 Alamouti STBC).
 - **Hình 4.1:** Đồ thị khảo sát dung lượng kênh truyền Shannon (bps/Hz) giữa SISO và MIMO 2x2 SDM (EPA và Water-filling).
 - **Hình 4.2:** Minh họa phân bổ công suất tối ưu Water-filling trên kênh MIMO 2x2 (Ngưỡng chuyển tiếp chế độ $10.10\text{ dB}$).
-- **Hình 4.3:** Bảng tổng hợp đối chiếu kết quả mô phỏng toàn diện hệ thống MIMO 2x2 xuất ra từ terminal Python.
+- **Hình 4.3:** Bảng tổng hợp đối chiếu kết quả mô phỏng toàn diện hệ thống MIMO 2x2 minh họa qua giao diện terminal Python từ dữ liệu nhúng.
 
 ---
 
@@ -192,7 +192,7 @@ Trong đó:
 Đồ án môn học Truyền thông Không dây (ETC10309) kế thừa và phát triển từ tài liệu đề cương hướng dẫn đồ án (`Ref/Project_Instructions.pdf`), trong đó bài toán cơ sở P1 (Mô phỏng kênh truyền fading diện hẹp) và P2 (Bộ cân bằng ZF/MMSE) được phát triển mở rộng lên không gian đa chiều $2 \times 2$ cho hai sơ đồ kinh điển: Phân tập STBC Alamouti và Ghép kênh không gian SDM. Đồ án giải quyết trọn vẹn hai nội dung trọng tâm trên hệ thống MIMO $2 \times 2$ ($N_t = 2, N_r = 2$):
 1. **Khảo sát giải mã bước-từng-bước:** Trên ma trận kênh thực nghiệm cố định `[9, 10]`:
    $$\mathbf{H} = \begin{bmatrix} 0.7 & 0.3 \\ 0.4 & 0.6 \end{bmatrix}$$
-   Hai ký hiệu điều chế phức phát đi minh họa từ chòm sao QPSK chuẩn hóa là $s_0 = 1 + 1j$ và $s_1 = 1 - 1j$. Tính toán chi tiết từng giá trị tín hiệu nhận $r_0, r_1, r_2, r_3$, các phép toán biến đổi ma trận giải mã cho STBC Alamouti và SDM (ZF, MMSE, SVD), và chứng minh bằng đại số khả năng khôi phục chính xác ký hiệu gốc.
+   Hai ký hiệu điều chế phức phát đi minh họa sử dụng các ký hiệu QPSK chưa chuẩn hóa với năng lượng ký hiệu $E_s = 2$ là $s_0 = 1 + 1j$ và $s_1 = 1 - 1j$. Tính toán chi tiết từng giá trị tín hiệu nhận $r_0, r_1, r_2, r_3$, các phép toán biến đổi ma trận giải mã cho STBC Alamouti và SDM (ZF, MMSE, SVD), và chứng minh bằng đại số khả năng khôi phục chính xác ký hiệu gốc.
 2. **Khảo sát hiệu năng thống kê trên kênh fading Rayleigh ngẫu nhiên:** Đánh giá BER qua mô phỏng Monte Carlo ($5 \times 10^5$ bit với điều chế BPSK) đối chiếu với các công thức giải tích lý thuyết cho SISO, SIMO SC/MRC, MISO Alamouti và MIMO $2 \times 2$ Alamouti. Khảo sát dung lượng kênh truyền Shannon-Telatar giữa phân bổ công suất đồng đều (EPA) và thuật toán tối ưu Water-filling `[2, 4, 8]`.
 
 ---
@@ -259,7 +259,7 @@ Sai số số học máy tính: Trong môi trường Python (NumPy 64-bit), sai 
 ### 2.1.6. Kết quả mô phỏng và kiểm chứng chòm sao tín hiệu STBC
 ![Hình 2.1: Quá trình khôi phục ký hiệu và chòm sao tín hiệu hệ thống MIMO 2x2 STBC Alamouti](../figures/fig1_stbc_signal_recovery.png)
 
-![Hình 2.3: Kết quả xác thực mô phỏng khối STBC Alamouti 2x2 trên Terminal MATLAB](../figures/term_capture_stbc_matlab.png)
+![Hình 2.3: Hình ảnh minh họa kết quả mô phỏng khối STBC Alamouti 2x2 từ dữ liệu nhúng qua giao diện Terminal MATLAB](../figures/term_capture_stbc_matlab.png)
 
 ---
 
@@ -305,7 +305,7 @@ Phân rã $\mathbf{H} = \mathbf{U} \mathbf{\Sigma} \mathbf{V}^H$ với các giá
 
 ![Hình 2.2: Quá trình tách sóng và khôi phục tín hiệu hệ thống MIMO 2x2 SDM](../figures/fig2_sdm_signal_recovery.png)
 
-![Hình 2.4: Kết quả xác thực mô phỏng khối SDM 2x2 trên Terminal MATLAB](../figures/term_capture_sdm_matlab.png)
+![Hình 2.4: Hình ảnh minh họa kết quả mô phỏng khối SDM 2x2 từ dữ liệu nhúng qua giao diện Terminal MATLAB](../figures/term_capture_sdm_matlab.png)
 
 ---
 
@@ -348,7 +348,7 @@ Bộ kiểm chứng thực thi mô phỏng Monte Carlo với $5 \times 10^5$ bit
 | **25 dB** | 7.8870e-04 | 6.7400e-04 | 6.0000e-06 | 4.0000e-06 | 7.4216e-06 | 2.1384e-10 | < 1.0e-05 |
 
 *Ghi chú nguồn dữ liệu:* Cột SISO Mô phỏng, SIMO SC, SIMO MRC và MIMO 2x2 Mô phỏng được thống kê trực tiếp từ mô phỏng Monte Carlo $5 \times 10^5$ bit; cột SISO Lý thuyết, MISO 2x1 Alamouti và MIMO 2x2 Lý thuyết được tính từ các công thức giải tích khép kín tại Mục 3.2.
-*Đánh giá độ khớp:* Kết quả mô phỏng khớp tốt với lý thuyết trên toàn dải SNR. Ở vùng SNR cao ($\ge 20\text{ dB}$), do xác suất lỗi giảm sâu xuống dưới $10^{-4}$ (chỉ còn ghi nhận từ vài chục bit lỗi trên tổng số $5 \times 10^5$ bit mẫu), xuất hiện sai số thống kê hữu hạn (ví dụ tại $20\text{ dB}$, SIMO SC mô phỏng ghi nhận $5.40 \times 10^{-5}$ so với lý thuyết là $3.71 \times 10^{-5}$). Đối với MIMO $2 \times 2$ STBC, tại $\text{SNR} \ge 15\text{ dB}$, xác suất lỗi lý thuyết rơi xuống mức $10^{-6} - 10^{-10}$, vượt qua giới hạn phân giải của tập mẫu $5 \times 10^5$ bit (ghi nhận $< 1.0 \times 10^{-5}$).
+*Đánh giá độ khớp:* Kết quả mô phỏng bám sát lý thuyết ở vùng SNR thấp và trung bình. Ở vùng SNR cao ($\ge 20\text{ dB}$), do xác suất lỗi giảm sâu xuống dưới $10^{-4}$, xuất hiện sai số thống kê hữu hạn từ tập mẫu $5 \times 10^5$ bit. Cần lưu ý rằng các điểm BER cực nhỏ hoặc ghi nhận 0 bit lỗi trong tập mẫu thử nghiệm không chứng minh độ khớp chính xác tuyệt đối giữa mô phỏng và lý thuyết tại vùng SNR cao, mà phản ánh giới hạn phân giải của số lượng mẫu mô phỏng hữu hạn.
 
 ## 3.5. Phân tích đồ thị BER, độ lợi SNR và so sánh độ dốc đường cong
 - Bậc phân tập $d=4$ của MIMO $2 \times 2$ tạo ra độ dốc gấp 4 lần SISO.
@@ -443,7 +443,7 @@ $$d^*(r) = \begin{cases} 4 - 3r, & 0 \le r \le 1 \\ 2 - r, & 1 \le r \le 2 \end{
 
 ![Hình 4.2: Minh họa thuật toán phân bổ công suất tối ưu Water-filling](../figures/fig5_waterfilling_allocation.png)
 
-![Hình 4.3: Bảng tổng hợp đối chiếu kết quả mô phỏng toàn diện](../figures/term_capture_simulation_summary.png)
+![Hình 4.3: Bảng tổng hợp đối chiếu kết quả mô phỏng toàn diện minh họa qua giao diện terminal từ dữ liệu nhúng](../figures/term_capture_simulation_summary.png)
 
 ---
 

@@ -44,6 +44,8 @@ capacityErgodicSiso = zeros(1, numSnrPoints);
 capacityErgodicEpa = zeros(1, numSnrPoints);
 capacityErgodicWf = zeros(1, numSnrPoints);
 
+rng(123, 'twister');
+
 for realizationIndex = 1:numRayleighRealizations
     hScalar = (randn + 1i * randn) / sqrt(2);
     channelGainSiso = abs(hScalar)^2;

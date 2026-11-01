@@ -193,11 +193,11 @@ figureSdmPath = os.path.join(figuresDirectory, "fig2_sdm_signal_recovery.png")
 figureSdm.savefig(figureSdmPath, dpi=300)
 plt.close(figureSdm)
 
-ebN0DbArray = np.arange(0, 26, 2, dtype=float)
+ebN0DbArray = np.unique(np.concatenate([np.arange(0, 25, 2, dtype=float), [5.0, 15.0, 25.0]]))
 ebN0LinearArray = 10.0**(ebN0DbArray / 10.0)
 numSnrEvaluationPoints = len(ebN0DbArray)
 
-numMonteCarloBits = 200000
+numMonteCarloBits = 500000
 
 berSimSiso = np.zeros(numSnrEvaluationPoints)
 berSimSimoSc = np.zeros(numSnrEvaluationPoints)
@@ -342,6 +342,9 @@ axBer.annotate("Diversity Order d = 2\n(SIMO MRC & MISO Alamouti)", xy=(14, 5e-4
 axBer.annotate("Diversity Order d = 4\n(MIMO 2x2 Alamouti)", xy=(10, 1.5e-4), xytext=(12, 1e-4),
                arrowprops=dict(arrowstyle="->", color="forestgreen", lw=1.2), fontsize=9, fontweight="bold")
 
+axBer.text(0.98, 0.02, f"Sample budget: {numMonteCarloBits:,} bits ({numMonteCarloBits // 2:,} STBC blocks)\nZero-error points (BER = 0) omitted on log scale",
+           transform=axBer.transAxes, fontsize=8, ha="right", va="bottom",
+           bbox=dict(boxstyle="round,pad=0.3", facecolor="white", alpha=0.8, edgecolor="lightgray", linewidth=0.5))
 axBer.legend(loc="lower left", fontsize=8.5, framealpha=0.95)
 figureBer.tight_layout()
 figureBerPath = os.path.join(figuresDirectory, "fig3_ber_diversity_comparison.png")
@@ -390,22 +393,18 @@ for trialIndex in range(numErgodicTrials):
     gainScalarTrial = np.abs(hScalarTrial)**2
 
     hMimoTrial = (np.random.randn(2, 2) + 1j * np.random.randn(2, 2)) / np.sqrt(2.0)
-    eigenvaluesTrial = (la.svd(hMimoTrial)[1])**2
+    eigenvaluesTrial = (la.svd(hMimoTrial, compute_uv=False))**2
     noiseTrialLevels = 1.0 / eigenvaluesTrial
 
-    for capIndex, snrLin in enumerate(snrCapacityLinearArray):
-        capacityErgodicSiso[capIndex] += np.log2(1.0 + snrLin * gainScalarTrial)
-        capacityErgodicMimoEpa[capIndex] += np.sum(np.log2(1.0 + (snrLin / 2.0) * eigenvaluesTrial))
+    capacityErgodicSiso += np.log2(1.0 + snrCapacityLinearArray * gainScalarTrial)
+    capacityErgodicMimoEpa += np.sum(np.log2(1.0 + (snrCapacityLinearArray[:, None] / 2.0) * eigenvaluesTrial), axis=1)
 
-        if snrLin <= (noiseTrialLevels[1] - noiseTrialLevels[0]):
-            pTrial1 = snrLin
-            pTrial2 = 0.0
-        else:
-            waterLevelTrial = (snrLin + noiseTrialLevels[0] + noiseTrialLevels[1]) / 2.0
-            pTrial1 = waterLevelTrial - noiseTrialLevels[0]
-            pTrial2 = waterLevelTrial - noiseTrialLevels[1]
+    maskLowSnr = snrCapacityLinearArray <= (noiseTrialLevels[1] - noiseTrialLevels[0])
+    waterLevelTrial = (snrCapacityLinearArray + noiseTrialLevels[0] + noiseTrialLevels[1]) / 2.0
+    pTrial1 = np.where(maskLowSnr, snrCapacityLinearArray, waterLevelTrial - noiseTrialLevels[0])
+    pTrial2 = np.where(maskLowSnr, 0.0, waterLevelTrial - noiseTrialLevels[1])
 
-        capacityErgodicMimoWf[capIndex] += np.log2(1.0 + pTrial1 * eigenvaluesTrial[0]) + np.log2(1.0 + pTrial2 * eigenvaluesTrial[1])
+    capacityErgodicMimoWf += np.log2(1.0 + pTrial1 * eigenvaluesTrial[0]) + np.log2(1.0 + pTrial2 * eigenvaluesTrial[1])
 
 capacityErgodicSiso /= numErgodicTrials
 capacityErgodicMimoEpa /= numErgodicTrials
@@ -512,10 +511,12 @@ print("-" * 80)
 print("3. BER Diversity Comparison (Selected SNR sample points):")
 print(f"{'SNR(dB)':<8} | {'SISO Theo':<10} | {'SISO Sim':<10} | {'SIMO SC':<10} | {'SIMO MRC':<10} | {'MISO 2x1':<10} | {'MIMO 2x2 (Th/Sim)':<20}")
 print("-" * 80)
-for sampleIdx in range(0, numSnrEvaluationPoints, 2):
-    snrVal = ebN0DbArray[sampleIdx]
+for snrVal in [0.0, 5.0, 10.0, 15.0, 20.0, 25.0]:
+    sampleIdx = int(np.flatnonzero(ebN0DbArray == snrVal)[0])
     print(f"{snrVal:<8.1f} | {berTheorySiso[sampleIdx]:<10.2e} | {berSimSiso[sampleIdx]:<10.2e} | {berSimSimoSc[sampleIdx]:<10.2e} | {berSimSimoMrc[sampleIdx]:<10.2e} | {berSimMisoAlamouti[sampleIdx]:<10.2e} | {berTheoryMimoAlamouti[sampleIdx]:.2e} / {berSimMimoAlamouti[sampleIdx]:.2e}")
 print("-" * 80)
+print(f"Monte Carlo bit count: {numMonteCarloBits:,}; independent STBC fading blocks: {numMonteCarloBits // 2:,}.")
+print(f"Zero errors do not establish zero BER. Conservative 95% upper bound from zero block errors: {-np.expm1(np.log(0.05) / (numMonteCarloBits // 2)):.2e}.")
 print("4. MIMO 2x2 Capacity Comparison (bps/Hz):")
 print(f"{'SNR(dB)':<8} | {'SISO AWGN':<10} | {'SISO Rayl':<10} | {'Fixed EPA':<10} | {'Fixed WF':<10} | {'Ergodic EPA':<12} | {'Ergodic WF':<12}")
 print("-" * 80)

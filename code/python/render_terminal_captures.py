@@ -119,6 +119,7 @@ def parseColoredLine(line):
     return [(line, colorDefault)]
 
 def renderTerminalImage(windowTitle, rawLines, outputPath):
+    rawLines = ["ILLUSTRATION FROM EMBEDDED TEXT, NOT A LIVE EXECUTION CAPTURE"] + list(rawLines)
     charWidth = 9.0
     lineHeight = 24
     paddingX = 26
@@ -364,4 +365,4 @@ renderTerminalImage(
     os.path.join(figuresDir, "term_capture_simulation_summary.png")
 )
 
-print("Rendered all terminal capture images with exact monospace grid alignment.")
+print("Rendered all illustrated terminal images with exact monospace grid alignment.")

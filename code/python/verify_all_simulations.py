@@ -1,4 +1,15 @@
 import os
+import io
+import runpy
+from unittest.mock import patch
+
+
+def assert_ber(sim, theo, n_bits, block_size=1):
+    sim_arr, theo_arr = np.atleast_1d(sim), np.atleast_1d(theo)
+    assert np.all((sim_arr >= 0.0) & (sim_arr <= 1.0) & np.isfinite(sim_arr))
+    tolerance = 7.0 * np.sqrt(block_size * theo_arr * (1.0 - theo_arr) / n_bits) + block_size / n_bits
+    assert np.all(np.abs(sim_arr - theo_arr) <= tolerance)
+
 import numpy as np
 import scipy.linalg as la
 
@@ -144,7 +155,9 @@ for snrDb in snrBerDbList:
         "snrDb": snrDb,
         "sisoTheo": pTheorySiso,
         "sisoSim": pSimSiso,
+        "simoScTheo": pTheorySimoSc,
         "simoSc": pSimSimoSc,
+        "simoMrcTheo": pTheorySimoMrc,
         "simoMrc": pSimSimoMrc,
         "misoTheo": pTheoryMiso,
         "misoSim": pSimMiso,
@@ -213,6 +226,8 @@ for row in berResults:
     assert row["sisoTheo"] > 0
     assert row["mimoTheo"] > 0
     assert row["mimoTheo"] < row["sisoTheo"]
+    for observed, expected, block_size in [("sisoSim", "sisoTheo", 1), ("simoSc", "simoScTheo", 1), ("simoMrc", "simoMrcTheo", 1), ("misoSim", "misoTheo", 2), ("mimoSim", "mimoTheo", 2)]:
+        assert_ber(row[observed], row[expected], numBitsSimulation, block_size)
 
 for i in range(len(berResults) - 1):
     assert berResults[i]["sisoTheo"] > berResults[i + 1]["sisoTheo"]
@@ -246,7 +261,7 @@ print(f"  SVD Precoding & Decoupling Error:          ||x_hat_SVD  - x|| = {error
 print("-" * 104)
 print("PART 2: BIT ERROR RATE (BER) DIVERSITY COMPARISON AT KEY EVALUATION SNRs")
 print("-" * 104)
-print(" SNR(dB) | SISO Theo   | SISO Sim    | SIMO SC     | SIMO MRC    | MISO 2x1    | MIMO 2x2 (Th / Sim) ")
+print(" SNR(dB) | SISO Theo   | SISO Sim    | SIMO SC     | SIMO MRC    | MISO Theo   | MIMO 2x2 (Th / Sim) ")
 print("---------+-------------+-------------+-------------+-------------+-------------+-----------------------")
 for row in berResults:
     print(f" {row['snrDb']:4.0f} dB | {row['sisoTheo']:1.4e}  | {row['sisoSim']:1.4e}  | {row['simoSc']:1.4e}  | {row['simoMrc']:1.4e}  | {row['misoTheo']:1.4e}  | {row['mimoTheo']:1.4e} / {row['mimoSim']:1.4e}")
@@ -258,4 +273,34 @@ print("---------+-------------+-------------+-------------+-------------+-------
 for row in capResults:
     print(f" {row['snrDb']:4.0f} dB | {row['sisoAwgn']:1.4f}      | {row['sisoRayl']:1.4f}      | {row['fixedEpa']:1.4f}      | {row['fixedWf']:1.4f}      | {row['ergEpa']:1.4f}      | {row['ergWf']:1.4f}      | +{row['gain']:1.4f}")
 print("=" * 104)
+prod_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mimo_full_simulation.py")
+with patch("matplotlib.figure.Figure.savefig", lambda *args, **kwargs: None), patch("sys.stdout", new_callable=io.StringIO):
+    prod = runpy.run_path(prod_path)
+assert prod["numMonteCarloBits"] == 500000
+assert np.all(np.isin(snrBerDbList, prod["ebN0DbArray"]))
+assert np.all(np.isin(snrCapDbList, prod["snrCapacityDbArray"]))
+for name in ["errorStbcS0", "errorStbcS1", "errorNormZf", "errorNormMmse", "errorNormSvd"]:
+    assert prod[name] < 1e-12
+assert np.allclose([prod["receivedSignalR0"], prod["receivedSignalR1"], prod["receivedSignalR2"], prod["receivedSignalR3"]], [receivedSignalR0, receivedSignalR1, receivedSignalR2, receivedSignalR3])
+assert np.allclose([prod["recoveredSymbolHatS0"], prod["recoveredSymbolHatS1"]], [s0, s1])
+for name in ["recoveredVectorZf", "recoveredVectorMmse", "recoveredVectorSvd"]:
+    assert np.allclose(prod[name], symbolVectorX)
+for row in berResults:
+    b_idx = int(np.flatnonzero(prod["ebN0DbArray"] == row["snrDb"])[0])
+    for name, key in [("Siso", "sisoTheo"), ("SimoSc", "simoScTheo"), ("SimoMrc", "simoMrcTheo"), ("MisoAlamouti", "misoTheo"), ("MimoAlamouti", "mimoTheo")]:
+        assert np.isclose(prod["berTheory" + name][b_idx], row[key], rtol=1e-12, atol=1e-15)
+for name, block_size in [("Siso", 1), ("SimoSc", 1), ("SimoMrc", 1), ("MisoAlamouti", 2), ("MimoAlamouti", 2)]:
+    assert_ber(prod["berSim" + name], prod["berTheory" + name], prod["numMonteCarloBits"], block_size)
+for row in capResults:
+    c_idx = int(np.flatnonzero(prod["snrCapacityDbArray"] == row["snrDb"])[0])
+    for name, key in [("capacitySisoAwgn", "sisoAwgn"), ("capacityFixedH_Epa", "fixedEpa"), ("capacityFixedH_Wf", "fixedWf")]:
+        assert np.isclose(prod[name][c_idx], row[key], rtol=1e-12, atol=1e-15)
+    for name, key in [("Siso", "sisoRayl"), ("MimoEpa", "ergEpa"), ("MimoWf", "ergWf")]:
+        assert np.isclose(prod["capacityErgodic" + name][c_idx], row[key], rtol=0.03, atol=0.1)
+assert np.allclose(prod["powerRatioFixed1"] + prod["powerRatioFixed2"], 1.0)
+assert np.all(prod["powerRatioFixed1"] >= 0.0) and np.all(prod["powerRatioFixed2"] >= 0.0)
+assert np.all(prod["capacityFixedH_Wf"] >= prod["capacityFixedH_Epa"] - 1e-9)
+assert np.all(prod["capacityErgodicMimoWf"] >= prod["capacityErgodicMimoEpa"] - 1e-9)
+print("[PRODUCTION AUDIT] Direct production recovery, all five BER modes, capacity references and power budgets verified.")
+print("[WARN: STATISTICAL CEILING] Zero observed errors do not establish zero BER or validate tiny theoretical BER.")
 print("[SIMULATION VERIFICATION COMPLETE] All 5 mathematical modules verified against analytical models.")

@@ -20,6 +20,8 @@ berTheoreticalSimoMrc = zeros(1, numSnrPoints);
 berTheoreticalMisoAlamouti = zeros(1, numSnrPoints);
 berTheoreticalMimoAlamouti = zeros(1, numSnrPoints);
 
+rng(42, 'twister');
+
 for snrIndex = 1:numSnrPoints
     snrLinear = ebN0LinearValues(snrIndex);
     noiseVariance = 1 / snrLinear;
@@ -172,4 +174,6 @@ for i = 1:numSnrPoints
         berSimulatedSimoSc(i), berSimulatedSimoMrc(i), berSimulatedMisoAlamouti(i), ...
         berTheoreticalMimoAlamouti(i), berSimulatedMimoAlamouti(i));
 end
+fprintf('Sample count: %d bits, %d independent STBC blocks. Zero errors do not establish zero BER.\n', numBits, numBits / 2);
+fprintf('Conservative 95%% upper bound from zero block errors: %.2e.\n', -expm1(log(0.05) / (numBits / 2)));
 fprintf('========================================================================================\n');

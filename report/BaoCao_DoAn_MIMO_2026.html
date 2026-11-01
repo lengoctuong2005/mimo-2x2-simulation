@@ -442,7 +442,7 @@ Báo cáo này trình bày nghiên cứu chuyên sâu về thiết kế, phân t
 Ở khối STBC $2 	imes 2$, báo cáo phân tích tường minh đại số ma trận, tính toán chính xác 4 giá trị tín hiệu nhận $r_0, r_1, r_2, r_3$ qua hai khe thời gian và chứng minh toán học sự trực giao tuyệt đối của ma trận kênh tương đương $\mathbf{H}_{eff}$, qua đó khôi phục hoàn hảo hai ký hiệu gốc với sai số máy tính đạt mức $1.11 	imes 10^{-16}$. Ở khối SDM $2 	imes 2$, báo cáo phân tích đối chiếu ba kỹ thuật tách sóng: Zero-Forcing (ZF), Minimum Mean Square Error (MMSE) và tiền mã hóa SVD (Singular Value Decomposition). Báo cáo làm rõ bản chất khuếch đại nhiễu của ZF thông qua nghịch đảo ma trận Gram $(H^H H)^{-1}$ và cơ chế phân tách thành hai kênh con trực giao song song của SVD.
 </p>
 <p>
-Trên kênh fading phẳng Rayleigh biến đổi chậm, đồ án khảo sát toàn diện hiệu năng tỷ lệ lỗi bit (BER) qua $2 	imes 10^5$ bit mô phỏng Monte Carlo, đối chiếu chặt chẽ với công thức giải tích khép kín cho các cấu hình SISO, SIMO (SC, MRC), MISO $2 	imes 1$ Alamouti và MIMO $2 	imes 2$ Alamouti. Kết quả chứng minh hệ thống MIMO $2 	imes 2$ STBC đạt bậc phân tập tối đa $d = N_t N_r = 4$, độ dốc đường cong BER gấp 4 lần SISO và tiết kiệm tới $16.9	ext{ dB}$ công suất phát tại $	ext{BER} = 10^{-3}$. Khảo sát dung lượng kênh truyền theo công thức Shannon-Telatar khẳng định ưu thế vượt trội của SDM trong việc nhân đôi tốc độ truyền dữ liệu, đồng thời phân tích chi tiết thuật toán Water-filling với ngưỡng chuyển dịch chế độ $10.10	ext{ dB}$ từ Beamforming sang ghép kênh đa luồng, làm rõ sự đánh đổi kinh điển giữa độ lợi phân tập và tốc độ ghép kênh (Diversity-Multiplexing Trade-off).
+Trên kênh fading phẳng Rayleigh biến đổi chậm, đồ án khảo sát toàn diện hiệu năng tỷ lệ lỗi bit (BER) qua $5 	imes 10^5$ bit mô phỏng Monte Carlo, đối chiếu chặt chẽ với công thức giải tích khép kín cho các cấu hình SISO, SIMO (SC, MRC), MISO $2 	imes 1$ Alamouti và MIMO $2 	imes 2$ Alamouti. Kết quả chứng minh hệ thống MIMO $2 	imes 2$ STBC đạt bậc phân tập tối đa $d = N_t N_r = 4$, độ dốc đường cong BER gấp 4 lần SISO và tiết kiệm tới $16.9	ext{ dB}$ công suất phát tại $	ext{BER} = 10^{-3}$. Khảo sát dung lượng kênh truyền theo công thức Shannon-Telatar khẳng định ưu thế vượt trội của SDM trong việc nhân đôi tốc độ truyền dữ liệu, đồng thời phân tích chi tiết thuật toán Water-filling với ngưỡng chuyển dịch chế độ $10.10	ext{ dB}$ từ Beamforming sang ghép kênh đa luồng, làm rõ sự đánh đổi kinh điển giữa độ lợi phân tập và tốc độ ghép kênh (Diversity-Multiplexing Trade-off).
 </p>
 
 <div style="margin-top: 30px;"></div>
@@ -454,7 +454,7 @@ This project presents an in-depth analytical investigation, mathematical derivat
 For $2 	imes 2$ STBC, the exact algebra of received signals across two successive time slots ($r_0, r_1, r_2, r_3$) is computed, and the column orthogonality of the virtual effective channel matrix $\mathbf{H}_{eff}$ is mathematically proven, achieving perfect signal recovery with machine precision error of $1.11 	imes 10^{-16}$. For $2 	imes 2$ SDM, three detection techniques are analyzed: Zero-Forcing (ZF), Minimum Mean Square Error (MMSE), and Singular Value Decomposition (SVD) precoding. The noise enhancement phenomenon in ZF is rigorously characterized via the diagonal entries of $(H^H H)^{-1}$, while SVD establishes parallel, non-interfering spatial subchannels.
 </p>
 <p style="font-style: italic;">
-Under quasi-static Rayleigh flat fading channels, extensive Monte Carlo simulations ($2 	imes 10^5$ bits) are conducted to evaluate Bit Error Rate (BER) across SNR values from $0	ext{ dB}$ to $25	ext{ dB}$, showing exact concordance with closed-form theoretical models across SISO, SIMO (SC, MRC), MISO $2 	imes 1$, and MIMO $2 	imes 2$ schemes. The Alamouti $2 	imes 2$ system achieves maximum diversity order $d = N_t N_r = 4$, yielding a $16.9	ext{ dB}$ SNR gain over SISO at $	ext{BER} = 10^{-3}$. Furthermore, Shannon-Telatar ergodic and instantaneous capacities demonstrate that SDM doubles the spectral efficiency at high SNRs, while Water-filling power allocation provides substantial capacity gains at low SNRs below the critical threshold of $10.10	ext{ dB}$, embodying the fundamental Diversity-versus-Multiplexing Trade-off (DMT).
+Under quasi-static Rayleigh flat fading channels, extensive Monte Carlo simulations ($5 	imes 10^5$ bits) are conducted to evaluate Bit Error Rate (BER) across SNR values from $0	ext{ dB}$ to $25	ext{ dB}$, showing exact concordance with closed-form theoretical models across SISO, SIMO (SC, MRC), MISO $2 	imes 1$, and MIMO $2 	imes 2$ schemes. The Alamouti $2 	imes 2$ system achieves maximum diversity order $d = N_t N_r = 4$, yielding a $16.9	ext{ dB}$ SNR gain over SISO at $	ext{BER} = 10^{-3}$. Furthermore, Shannon-Telatar ergodic and instantaneous capacities demonstrate that SDM doubles the spectral efficiency at high SNRs, while Water-filling power allocation provides substantial capacity gains at low SNRs below the critical threshold of $10.10	ext{ dB}$, embodying the fundamental Diversity-versus-Multiplexing Trade-off (DMT).
 </p>
 
 <div class="page-break"></div>
@@ -525,12 +525,12 @@ Under quasi-static Rayleigh flat fading channels, extensive Monte Carlo simulati
   <tr><td class="toc-title"><strong>Hình 1.1:</strong> Phân loại kiến trúc mảng đa anten MIMO trong thông tin không dây</td><td class="toc-dots"></td><td class="toc-page">3</td></tr>
   <tr><td class="toc-title"><strong>Hình 2.1:</strong> Quá trình khôi phục ký hiệu và chòm sao tín hiệu hệ thống MIMO 2x2 STBC Alamouti</td><td class="toc-dots"></td><td class="toc-page">11</td></tr>
   <tr><td class="toc-title"><strong>Hình 2.2:</strong> Quá trình tách sóng và khôi phục tín hiệu hệ thống MIMO 2x2 SDM (ZF, MMSE, SVD)</td><td class="toc-dots"></td><td class="toc-page">18</td></tr>
-  <tr><td class="toc-title"><strong>Hình 2.3:</strong> Kết quả xác thực mô phỏng khối STBC Alamouti 2x2 trên Terminal MATLAB</td><td class="toc-dots"></td><td class="toc-page">12</td></tr>
-  <tr><td class="toc-title"><strong>Hình 2.4:</strong> Kết quả xác thực mô phỏng khối SDM 2x2 trên Terminal MATLAB</td><td class="toc-dots"></td><td class="toc-page">19</td></tr>
+  <tr><td class="toc-title"><strong>Hình 2.3:</strong> Hình ảnh minh họa kết quả mô phỏng khối STBC Alamouti 2x2 từ dữ liệu nhúng qua giao diện Terminal MATLAB</td><td class="toc-dots"></td><td class="toc-page">12</td></tr>
+  <tr><td class="toc-title"><strong>Hình 2.4:</strong> Hình ảnh minh họa kết quả mô phỏng khối SDM 2x2 từ dữ liệu nhúng qua giao diện Terminal MATLAB</td><td class="toc-dots"></td><td class="toc-page">19</td></tr>
   <tr><td class="toc-title"><strong>Hình 3.1:</strong> So sánh hiệu năng BER giữa các kỹ thuật phân tập không gian (SISO, SIMO, MISO, MIMO)</td><td class="toc-dots"></td><td class="toc-page">25</td></tr>
   <tr><td class="toc-title"><strong>Hình 4.1:</strong> So sánh dung lượng kênh truyền Shannon giữa SISO và MIMO 2x2 SDM</td><td class="toc-dots"></td><td class="toc-page">32</td></tr>
   <tr><td class="toc-title"><strong>Hình 4.2:</strong> Minh họa thuật toán phân bổ công suất tối ưu Water-filling trên kênh MIMO 2x2</td><td class="toc-dots"></td><td class="toc-page">33</td></tr>
-  <tr><td class="toc-title"><strong>Hình 4.3:</strong> Bảng tổng hợp đối chiếu kết quả mô phỏng toàn diện hệ thống MIMO 2x2</td><td class="toc-dots"></td><td class="toc-page">35</td></tr>
+  <tr><td class="toc-title"><strong>Hình 4.3:</strong> Bảng tổng hợp đối chiếu kết quả mô phỏng toàn diện hệ thống MIMO 2x2 minh họa qua giao diện terminal Python từ dữ liệu nhúng</td><td class="toc-dots"></td><td class="toc-page">35</td></tr>
 </table>
 
 <div style="margin-top: 25px;"></div>
@@ -658,9 +658,9 @@ Trong khuôn khổ đồ án môn học này, chúng tôi tập trung thiết k�
   <ol style="margin-top:6px; padding-left: 1.2cm;">
     <li><strong>Khảo sát giải mã bước-từng-bước (Step-by-step Signal Recovery):</strong> Thực hiện trên mô hình kênh truyền thực nghiệm cố định được xác định bởi ma trận:
       $$\mathbf{H} = \begin{bmatrix} 0.7 & 0.3 \\ 0.4 & 0.6 \end{bmatrix}$$
-      Hai ký hiệu điều chế số phức được truyền là $s_0 = 1 + 1j$ và $s_1 = 1 - 1j$. Tính toán chi tiết từng giá trị tín hiệu nhận, các phép toán biến đổi ma trận giải mã cho cả hai cấu trúc STBC Alamouti và SDM (ZF, MMSE, SVD), đồng thời chứng minh bằng toán học khả năng khôi phục chính xác ký hiệu ban đầu.
+      Hai ký hiệu điều chế số phức được truyền từ chòm sao QPSK chưa chuẩn hóa với năng lượng ký hiệu $E_s = 2$ là $s_0 = 1 + 1j$ và $s_1 = 1 - 1j$. Tính toán chi tiết từng giá trị tín hiệu nhận, các phép toán biến đổi ma trận giải mã cho cả hai cấu trúc STBC Alamouti và SDM (ZF, MMSE, SVD), đồng thời chứng minh bằng toán học khả năng khôi phục chính xác ký hiệu ban đầu.
     </li>
-    <li><strong>Khảo sát hiệu năng thống kê trên kênh fading Rayleigh ngẫu nhiên:</strong> Đánh giá toàn diện tỷ lệ lỗi bit (BER) qua mô phỏng Monte Carlo ($2 \times 10^5$ bit) đối chiếu với các công thức giải tích lý thuyết cho các cấu hình SISO, SIMO SC/MRC, MISO Alamouti và MIMO $2 \times 2$ Alamouti. Khảo sát dung lượng kênh truyền Shannon-Telatar (bps/Hz) giữa phân bổ công suất đồng đều (EPA) và thuật toán tối ưu Water-filling.
+    <li><strong>Khảo sát hiệu năng thống kê trên kênh fading Rayleigh ngẫu nhiên:</strong> Đánh giá toàn diện tỷ lệ lỗi bit (BER) qua mô phỏng Monte Carlo ($5 \times 10^5$ bit) đối chiếu với các công thức giải tích lý thuyết cho các cấu hình SISO, SIMO SC/MRC, MISO Alamouti và MIMO $2 \times 2$ Alamouti. Khảo sát dung lượng kênh truyền Shannon-Telatar (bps/Hz) giữa phân bổ công suất đồng đều (EPA) và thuật toán tối ưu Water-filling.
     </li>
   </ol>
 </div>
@@ -825,7 +825,7 @@ Hình 2.1 thể hiện đồ thị chòm sao tín hiệu và quá trình khôi p
 
 <figure class="academic-figure">
   <img src="../figures/term_capture_stbc_matlab.png" alt="Terminal capture STBC MATLAB">
-  <figcaption class="figure-caption"><strong>Hình 2.3:</strong> Kết quả xác thực mô phỏng khối STBC Alamouti 2x2 trên Terminal MATLAB.</figcaption>
+  <figcaption class="figure-caption"><strong>Hình 2.3:</strong> Hình ảnh minh họa kết quả mô phỏng khối STBC Alamouti 2x2 từ dữ liệu nhúng qua giao diện Terminal MATLAB.</figcaption>
 </figure>
 
 <h2 class="section-title">2.2. Phân tích chi tiết hệ thống MIMO 2x2 Ghép kênh không gian (SDM)</h2>
@@ -984,7 +984,7 @@ Bảng 2.2 và Hình 2.2 so sánh chi tiết ba phương pháp tách sóng trong
 
 <figure class="academic-figure">
   <img src="../figures/term_capture_sdm_matlab.png" alt="Terminal capture SDM MATLAB">
-  <figcaption class="figure-caption"><strong>Hình 2.4:</strong> Kết quả xác thực mô phỏng khối SDM 2x2 trên Terminal MATLAB.</figcaption>
+  <figcaption class="figure-caption"><strong>Hình 2.4:</strong> Hình ảnh minh họa kết quả mô phỏng khối SDM 2x2 từ dữ liệu nhúng qua giao diện Terminal MATLAB.</figcaption>
 </figure>
 
 <!-- CHƯƠNG 3 -->
@@ -1053,12 +1053,12 @@ $$P_b^{MIMO 2\times 2} = \frac{1}{2} \left[ 1 - \frac{1}{\sqrt{\pi}} \sum_{k=0}^
 
 <h2 class="section-title">3.3. Phương pháp mô phỏng Monte Carlo trên kênh fading Rayleigh</h2>
 <p>
-Để kiểm chứng các mô hình toán học giải tích, chúng tôi xây dựng chương trình mô phỏng Monte Carlo với $N = 2 \times 10^5$ bit ngẫu nhiên. Trong mỗi lần thử, một chuỗi bit BPSK được truyền qua các kênh fading Rayleigh được tạo lập từ các biến ngẫu nhiên Gauss phức độc lập: $h_{ij} = \frac{1}{\sqrt{2}}(X + jY)$ với $X, Y \sim \mathcal{N}(0, 1)$ sao cho $\mathbb{E}[|h_{ij}|^2] = 1$. Nhiễu AWGN được cộng vào tại mỗi anten thu tương ứng với mức SNR khảo sát từ $0\text{ dB}$ đến $25\text{ dB}$. Các thuật toán giải mã tương ứng được thực thi để đếm số lượng bit lỗi thực tế và tính tỷ lệ $\text{BER} = \frac{N_{\text{err}}}{N_{\text{total}}}$.
+Để kiểm chứng các mô hình toán học giải tích, chúng tôi xây dựng chương trình mô phỏng Monte Carlo với $N = 5 \times 10^5$ bit ngẫu nhiên. Trong mỗi lần thử, một chuỗi bit BPSK được truyền qua các kênh fading Rayleigh được tạo lập từ các biến ngẫu nhiên Gauss phức độc lập: $h_{ij} = \frac{1}{\sqrt{2}}(X + jY)$ với $X, Y \sim \mathcal{N}(0, 1)$ sao cho $\mathbb{E}[|h_{ij}|^2] = 1$. Nhiễu AWGN được cộng vào tại mỗi anten thu tương ứng với mức SNR khảo sát từ $0\text{ dB}$ đến $25\text{ dB}$. Các thuật toán giải mã tương ứng được thực thi để đếm số lượng bit lỗi thực tế và tính tỷ lệ $\text{BER} = \frac{N_{\text{err}}}{N_{\text{total}}}$.
 </p>
 
 <h2 class="section-title">3.4. Bảng số liệu đối chiếu chi tiết giữa lý thuyết và mô phỏng thực tế</h2>
 <p>
-Bảng 3.1 trình bày số liệu đo đạc chi tiết tại các mốc SNR đánh giá quan trọng từ $0\text{ dB}$ đến $25\text{ dB}$. Kết quả cho thấy sự trùng khớp tuyệt đối giữa lý thuyết giải tích và mô phỏng thực nghiệm trên máy tính.
+Bảng 3.1 trình bày số liệu đo đạc chi tiết tại các mốc SNR đánh giá quan trọng từ $0\text{ dB}$ đến $25\text{ dB}$. Kết quả mô phỏng bám sát lý thuyết giải tích ở vùng SNR thấp và trung bình. Cần lưu ý rằng các điểm BER cực nhỏ hoặc ghi nhận 0 bit lỗi trong tập mẫu thử nghiệm không chứng minh độ khớp chính xác tuyệt đối giữa mô phỏng và lý thuyết tại vùng SNR cao, mà phản ánh giới hạn phân giải của kích thước mẫu mô phỏng hữu hạn.
 </p>
 
 <table class="academic-table">
@@ -1148,11 +1148,11 @@ Hình 3.1 biểu diễn đồ thị so sánh hiệu năng BER của 5 cấu hìn
   <li><strong>Về độ dốc đường cong (Bậc phân tập):</strong> Đường cong BER của hệ thống SISO ($d=1$) có độ dốc thấp nhất. Các đường cong của SIMO SC, SIMO MRC và MISO Alamouti $2 \times 1$ có độ dốc gấp đôi ($d=2$). Đặc biệt, đường cong của hệ thống MIMO $2 \times 2$ Alamouti có độ dốc gấp 4 lần SISO ($d=4$), lao dốc thẳng đứng xuống mức lỗi cực thấp khi SNR vượt qua $10\text{ dB}$.</li>
   <li><strong>Về độ lợi phân tập (Diversity Gain) và công suất tại mức BER mục tiêu $10^{-3}$ ($0.1\%$ lỗi):</strong>
     <ul>
-      <li>Hệ thống SISO đòi hỏi mức $\text{SNR} \approx 23.9\text{ dB}$.</li>
-      <li>Hệ thống SIMO $1 \times 2$ SC đòi hỏi $\text{SNR} \approx 13.0\text{ dB}$ (tiết kiệm $10.9\text{ dB}$ so với SISO).</li>
-      <li>Hệ thống SIMO $1 \times 2$ MRC đòi hỏi $\text{SNR} \approx 11.0\text{ dB}$ (tiết kiệm $12.9\text{ dB}$ so với SISO, tốt hơn SC $2.0\text{ dB}$).</li>
-      <li>Hệ thống MISO $2 \times 1$ Alamouti đòi hỏi $\text{SNR} \approx 14.0\text{ dB}$ (đúng bằng SIMO MRC $+ 3\text{ dB}$ penalty do chia công suất).</li>
-      <li>Hệ thống MIMO $2 \times 2$ Alamouti chỉ đòi hỏi mức $\text{SNR} \approx \mathbf{7.05\text{ dB}}$! Như vậy, so với SISO truyền thống, MIMO $2 \times 2$ STBC mang lại <strong>độ lợi công suất vượt trội lên tới $16.9\text{ dB}$</strong> (tương đương với việc giảm công suất máy phát hơn $44$ lần mà vẫn đạt cùng một độ tin cậy dịch vụ).</li>
+      <li>Hệ thống SISO đòi hỏi mức $\text{SNR} \approx 24.0\text{ dB}$ (chính xác: $23.97\text{ dB}$).</li>
+      <li>Hệ thống MISO $2 \times 1$ Alamouti đòi hỏi $\text{SNR} \approx 14.1\text{ dB}$ (độ lợi $+9.9\text{ dB}$ so với SISO).</li>
+      <li>Hệ thống SIMO $1 \times 2$ SC đòi hỏi $\text{SNR} \approx 12.6\text{ dB}$ (độ lợi $+11.4\text{ dB}$ so với SISO).</li>
+      <li>Hệ thống SIMO $1 \times 2$ MRC đòi hỏi $\text{SNR} \approx 11.1\text{ dB}$ (độ lợi $+12.9\text{ dB}$ so với SISO).</li>
+      <li>Hệ thống MIMO $2 \times 2$ Alamouti chỉ đòi hỏi mức $\text{SNR} \approx \mathbf{7.05\text{ dB}}$! Như vậy, so với SISO truyền thống, MIMO $2 \times 2$ STBC mang lại <strong>độ lợi công suất vượt trội lên tới $16.9\text{ dB}$</strong> (tương đương với việc giảm xấp xỉ $49$ lần công suất phát mà vẫn đạt cùng một độ tin cậy dịch vụ).</li>
     </ul>
   </li>
 </ol>
@@ -1366,14 +1366,13 @@ Bằng việc thực hiện lấy trung bình Monte Carlo trên 5000 hiện th�
 Kết quả nghiên cứu ở Chương 3 và Chương 4 dẫn đến một trong những định lý nền tảng sâu sắc nhất của lý thuyết truyền thông hiện đại: Sự đánh đổi cơ bản giữa Phân tập và Ghép kênh (Diversity-Multiplexing Trade-off - DMT), được đề xuất bởi Lizhong Zheng và David Tse (IEEE Trans. Inf. Theory, 2003).
 </p>
 <p>
-Một mảng anten MIMO gồm $N_t$ anten phát và $N_r$ anten thu cung cấp một không gian tự do hữu hạn. Các phần tử anten này có thể được sử dụng để tối đa hóa tốc độ dữ liệu (ghép kênh không gian SDM) hoặc để tối đa hóa độ tin cậy chống fading (mã hóa phân tập STBC), nhưng không thể cùng lúc đạt giá trị cực đại của cả hai yếu tố. Mối quan hệ đánh đổi tối ưu được xác định bởi đường cong tuyến tính từng đoạn:
-$$d(r) = (N_t - r)(N_r - r)$$
-Trong đó $r$ là độ lợi ghép kênh không gian ($0 \le r \le \min(N_t, N_r)$) và $d$ là bậc phân tập. Đối với hệ thống MIMO $2 \times 2$:
-$$d(r) = (2 - r)(2 - r) = (2 - r)^2$$
+Một mảng anten MIMO gồm $N_t$ anten phát và $N_r$ anten thu cung cấp một không gian tự do hữu hạn. Các phần tử anten này có thể được sử dụng để tối đa hóa tốc độ dữ liệu (ghép kênh không gian SDM) hoặc để tối đa hóa độ tin cậy chống fading (mã hóa phân tập STBC), nhưng không thể cùng lúc đạt giá trị cực đại của cả hai yếu tố. Đường cong đánh đổi tối ưu $d^*(r)$ là một đường gấp khúc tuyến tính từng đoạn (piecewise linear) nối các điểm nguyên $(k, d(k))$ với $k = 0, 1, \dots, \min(N_t, N_r)$ và $d(k) = (N_t - k)(N_r - k)$. Với cấu hình MIMO $2 \times 2$ ($N_t = 2, N_r = 2$), đường gấp khúc Zheng–Tse nối 3 điểm then chốt: $(0, 4) \to (1, 1) \to (2, 0)$:
+$$d^*(r) = \begin{cases} 4 - 3r, & 0 \le r \le 1 \\ 2 - r, & 1 \le r \le 2 \end{cases}$$
 </p>
 <ul>
-  <li>Khi $r = 0$ (Hệ thống STBC Alamouti): Hệ thống hy sinh hoàn toàn tốc độ tăng thêm ($R=1$) để đạt được độ lợi phân tập cực đại <strong>$d_{max} = 4$</strong>, bảo vệ thông tin ở mức hoàn hảo.</li>
-  <li>Khi $r = 2$ (Hệ thống SDM phân luồng song song với tách sóng ZF/MMSE): Hệ thống đạt tốc độ dữ liệu cực đại ($r_{max} = 2$, nhân đôi thông lượng), nhưng bậc phân tập bị suy giảm về <strong>$d = 0$</strong> (hoặc $d=1$ nếu dùng tách sóng phi tuyến OSIC/ML).</li>
+  <li>Khi $r = 0$ (Cực biên phân tập STBC Alamouti): Hệ thống đạt bậc phân tập cực đại <strong>$d_{max} = N_t N_r = 4$</strong>, tối đa hóa khả năng chống chịu hiện tượng fading sâu.</li>
+  <li>Khi $r = 2$ (Cực biên ghép kênh SDM): Hệ thống đạt tốc độ ghép kênh tối đa <strong>$r_{max} = \min(N_t, N_r) = 2$</strong>, nhân đôi tốc độ truyền dữ liệu, bậc phân tập tiệm cận $d = 0$.</li>
+  <li>Khi truyền ở tốc độ cố định với các bộ tách sóng tuyến tính Zero-Forcing hoặc MMSE, bậc phân tập thu được cho mỗi luồng dữ liệu độc lập là $d = N_r - N_t + 1 = 1$.</li>
 </ul>
 
 <figure class="academic-figure">
@@ -1388,7 +1387,7 @@ $$d(r) = (2 - r)(2 - r) = (2 - r)^2$$
 
 <figure class="academic-figure">
   <img src="../figures/term_capture_simulation_summary.png" alt="Terminal Simulation Summary">
-  <figcaption class="figure-caption"><strong>Hình 4.3:</strong> Bảng tổng hợp đối chiếu kết quả mô phỏng toàn diện hệ thống MIMO 2x2 xuất ra từ terminal Python.</figcaption>
+  <figcaption class="figure-caption"><strong>Hình 4.3:</strong> Bảng tổng hợp đối chiếu kết quả mô phỏng toàn diện hệ thống MIMO 2x2 minh họa qua giao diện terminal Python từ dữ liệu nhúng.</figcaption>
 </figure>
 
 <!-- CHƯƠNG 5 -->
@@ -1408,7 +1407,7 @@ Báo cáo đồ án đã hoàn thành toàn diện tất cả các mục tiêu l
   </li>
   <li><strong>Về mặt hiệu năng phân tập và tỷ lệ lỗi bit (BER):</strong>
     <ul>
-      <li>Chương trình mô phỏng Monte Carlo ($2 \times 10^5$ bit) đã đối chiếu hoàn hảo với các công thức giải tích lý thuyết cho cả 5 cấu hình hệ thống (SISO, SIMO SC, SIMO MRC, MISO Alamouti $2 \times 1$, và MIMO Alamouti $2 \times 2$).</li>
+      <li>Chương trình mô phỏng Monte Carlo ($5 \times 10^5$ bit) đã đối chiếu hoàn hảo với các công thức giải tích lý thuyết cho cả 5 cấu hình hệ thống (SISO, SIMO SC, SIMO MRC, MISO Alamouti $2 \times 1$, và MIMO Alamouti $2 \times 2$).</li>
       <li>Hệ thống MIMO $2 \times 2$ STBC chứng minh đạt được bậc phân tập cực đại $d = N_t N_r = 4$, độ dốc đường cong BER gấp 4 lần SISO. Tại mức lỗi mục tiêu $\text{BER} = 10^{-3}$, MIMO $2 \times 2$ mang lại <strong>độ lợi công suất vượt trội lên tới $16.9\text{ dB}$</strong> so với SISO và $6.6\text{ dB}$ so với MISO $2 \times 1$, giảm thiểu tối đa xác suất rớt gói trong môi trường fading sâu.</li>
     </ul>
   </li>
